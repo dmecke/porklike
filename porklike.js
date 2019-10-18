@@ -4,6 +4,78 @@ var _drw;
 var buttbuff;
 var talkwind;
 var curwind;
+var invwind;
+var statwind;
+var usewind;
+var hintwind;
+var t;
+var p_t;
+var thrslt;
+var shake;
+var dpal;
+var dirx;
+var diry;
+var itm_name;
+var itm_type;
+var itm_stat1;
+var itm_stat2;
+var itm_minf;
+var itm_maxf;
+var itm_desc;
+var mob_name;
+var mob_ani;
+var mob_atk;
+var mob_hp;
+var mob_los;
+var mob_minf;
+var mob_maxf;
+var mob_spec;
+var crv_sig;
+var crv_msk;
+var free_sig;
+var free_msk;
+var wall_sig;
+var wall_msk;
+var mobpool;
+var ipool_rar;
+var ipool_com;
+var fipool_rar;
+var fipool_com;
+var itm_known;
+var tani;
+var fadeperc;
+var logo_t;
+var logo_y;
+var win;
+var winfloor;
+var mob;
+var dmob;
+var p_mob;
+var inv;
+var eqp;
+var wind;
+var float;
+var hpwind;
+var thrdx;
+var thrdy;
+var st_steps;
+var st_kills;
+var st_meals;
+var st_killer;
+var flags;
+var rooms;
+var roomap;
+var doors;
+var distmap;
+var gover_spr;
+var gover_x;
+var gover_w;
+var fog;
+var floor;
+var tarr_dirt;
+var tarr_farn;
+var tarr_vase;
+var flaglib;
 
 function _init() {
     t = 0;
@@ -40,7 +112,6 @@ function _init() {
     wall_sig = explodeval("251,233,253,84,146,80,16,144,112,208,241,248,210,177,225,120,179,0,124,104,161,64,240,128,224,176,242,244,116,232,178,212,247,214,254,192,48,96,32,160,245,250,243,249,246,252");
     wall_msk = explodeval("0,6,0,11,13,11,15,13,3,9,0,0,9,12,6,3,12,15,3,7,14,15,0,15,6,12,0,0,3,6,12,9,0,9,0,15,15,7,15,14,0,0,0,0,0,0");
 
-    debug = {};
     startgame()
 }
 
@@ -58,12 +129,8 @@ function _draw() {
     drawlogo();
     checkfade();
 
-    //★
     cursor(4, 4);
     color(8);
-    for (let txt in all(debug)) {
-        print(txt);
-    }
 }
 
 function startgame() {
@@ -79,7 +146,6 @@ function startgame() {
     skipai = false;
     win = false;
     winfloor = 9;
-    //★
     mob = {};
     dmob = {};
     p_mob = addmob(1, 1, 1);
@@ -142,7 +208,6 @@ function update_inv() {
             if (hintwind) {
                 hintwind.dur = 0;
             }
-            //★
         } else if (curwind === usewind) {
             usewind.dur = 0;
             curwind = invwind;
@@ -182,7 +247,7 @@ function move_mnu(wnd) {
         wnd.cur += 1;
         moved = true;
     }
-    wnd.cur = (wnd.cur - 1) % wnd.length.txt + 1;
+    wnd.cur = (wnd.cur - 1) % wnd.txt.length + 1;
     return moved
 }
 
@@ -210,11 +275,11 @@ function update_pturn() {
 function update_aiturn() {
     dobuttbuff();
     p_t = Math.min(p_t + 0.125, 1);
-    for (m in all(mob)) {
+    mob.forEach(m => {
         if (m !== p_mob && m.mov) {
             m:mov();
         }
-    }
+    })
     if (p_t === 1) {
         _upd = update_game;
         if (checkend()) {
@@ -273,7 +338,7 @@ function draw_game() {
     }
     animap();
     map();
-    for (m in all(dmob)) {
+    dmob.forEach(m => {
         if (sin(time() * 8) > 0 || m === p_mob) {
             drawmob(m);
         }
@@ -281,14 +346,16 @@ function draw_game() {
         if (m.dur <= 0 && m !== p_mob) {
             del(dmob, m);
         }
-    }
+    });
 
     for (let i = mob.length; i >= 1; i--) {
         drawmob(mob[i]);
     }
 
     if (_upd === update_throw) {
-        let tx, ty = throwtile();
+        let thr = throwtile();
+        let tx = thr.x;
+        let ty = thr.y;
         let lx1 = p_mob.x * 8 + 3 + thrdx * 4;
         let ly1 = p_mob.y * 8 + 3 + thrdy * 4;
         let lx2 = mid(0, tx * 8 + 3, 127);
@@ -319,9 +386,9 @@ function draw_game() {
         }
     }
 
-    for (f in all(float)) {
+    float.forEach(f => {
         oprint8(f.txt, f.x, f.y, f.c, 0)
-    }
+    })
 }
 
 function drawlogo() {
@@ -352,19 +419,19 @@ function draw_gover() {
     palt(12, true);
     spr(gover_spr, gover_x, 30, gover_w, 2);
     if (!win) {
-        print("killed by a " + st_killer, 28, 43, 6);
+        luaprint("killed by a " + st_killer, 28, 43, 6);
     }
     palt();
     color(5);
     cursor(40, 56);
     if (!win) {
-        print("floor: " + floor);
+        luaprint("floor: " + floor);
     }
-    print("steps: " + st_steps);
-    print("kills: " + st_kills);
-    print("meals: " + st_meals);
+    luaprint("steps: " + st_steps);
+    luaprint("kills: " + st_kills);
+    luaprint("meals: " + st_meals);
 
-    print("press ❎", 46, 90, 5 + abs(sin(time() / 3) * 2));
+    luaprint("press ❎", 46, 90, 5 + Math.abs(Math.sin(time() / 3) * 2));
 }
 
 function animap() {
@@ -401,24 +468,25 @@ function drawspr(_spr, _x, _y, _c, _flip) {
 }
 
 function rectfill2(_x, _y, _w, _h, _c) {
-    rectfill(_x, _y, _x + max(_w - 1, 0), _y + max(_h - 1, 0), _c);
+    rectfill(_x, _y, _x + Math.max(_w - 1, 0), _y + Math.max(_h - 1, 0), _c);
 }
 
 function oprint8(_t, _x, _y, _c, _c2) {
     for (let i = 1; i <= 8; i++) {
-        print(_t, _x + dirx[i], _y + diry[i], _c2);
+        luaprint(_t, _x + dirx[i], _y + diry[i], _c2);
     }
-    print(_t, _x, _y, _c);
+    luaprint(_t, _x, _y, _c);
 }
 
 function dist(fx, fy, tx, ty) {
     let dx = fx - tx;
     let dy = fy - ty;
-    return sqrt(dx * dx + dy * dy);
+    return Math.sqrt(dx * dx + dy * dy);
 }
 
 function dofade() {
-    let p, kmax, col, k = Math.floor(mid(0, fadeperc, 1) * 100)
+    let p = Math.floor(mid(0, fadeperc, 1) * 100);
+    let kmax, col;
     for (let j = 1; j <= 15; j++) {
         col = j;
         kmax = Math.floor((p + j * 1.46) / 22);
@@ -431,7 +499,7 @@ function dofade() {
 
 function checkfade() {
     if (fadeperc > 0) {
-        fadeperc = max(fadeperc - 0.04, 0);
+        fadeperc = Math.max(fadeperc - 0.04, 0);
         dofade();
     }
 }
@@ -440,14 +508,14 @@ function wait(_wait) {
     do {
         _wait -= 1;
         flip();
-    }while (_wait < 0)
+    } while (_wait < 0);
 }
 
 function fadeout(spd, _wait) {
-    if (spd === nil) {
+    if (spd === null) {
         spd = 0.04;
     }
-    if (_wait === nil) {
+    if (_wait === null) {
         _wait = 0;
     }
     do {
@@ -460,7 +528,7 @@ function fadeout(spd, _wait) {
 
 function blankmap(_dflt) {
     let ret = {};
-    if (_dflt === nil) {
+    if (_dflt === null) {
         _dflt = 0;
     }
 
@@ -511,9 +579,9 @@ function explodeval(_arr) {
 
 function toval(_arr) {
     let _retarr = {};
-    for (let _i in all(_arr)) {
+    _arr.forEach(_i => {
         add(_retarr, Math.floor(tonum(_i)));
-    }
+    });
     return _retarr;
 }
 
@@ -630,11 +698,11 @@ function trig_step() {
 }
 
 function getmob(x, y) {
-    for (m in all(mob)) {
+    mob.forEach(m => {
         if (m.x === x && m.y === y) {
             return m;
         }
-    }
+    });
     return false;
 }
 
@@ -839,7 +907,7 @@ function calcdist(tx, ty) {
     do {
         step += 1;
         candnew = {};
-        for (c in all(cand)) {
+        cand.forEach(c => {
             for (let d = 1; d <= 4; d++) {
                 let dx = c.x + dirx[d];
                 let dy = c.y + diry[d];
@@ -850,7 +918,7 @@ function calcdist(tx, ty) {
                     }
                 }
             }
-        }
+        });
         cand = candnew;
     } while (cand.length === 0);
 }
@@ -910,7 +978,9 @@ function eat(itm, mb) {
 
 function throw_item() {
     let itm = inv[thrslt];
-    let tx, ty = throwtile();
+    let thr = throwtile();
+    let tx = thr.x;
+    let ty = thr.y;
     sfx(52);
     if (inbounds(tx, ty)) {
         let mb = getmob(tx, ty);
@@ -918,7 +988,7 @@ function throw_item() {
             if (itm_type[itm] === "fud") {
                 eat(itm, mb);
             } else {
-                hitmob(nil, mb, itm_stat1[itm]);
+                hitmob(null, mb, itm_stat1[itm]);
                 sfx(58);
             }
         }
@@ -938,7 +1008,7 @@ function throwtile() {
         ty += thrdy;
     } while (!iswalkable(tx, ty, "checkmobs"));
 
-    return tx, ty
+    return {x: tx, y: ty};
 }
 
 //>8
@@ -957,7 +1027,7 @@ function addwind(_x, _y, _w, _h, _txt) {
 }
 
 function drawind() {
-    for (w in all(wind)) {
+    wind.forEach((w) => {
         let wx = w.x;
         let wy = w.y;
         let ww = w.w;
@@ -971,15 +1041,15 @@ function drawind() {
         if (w.cur) {
             wx += 6;
         }
-        for (let i = 1; i <= w.length.txt; i++) {
-            let txt = w.txt[i]
+        for (let i = 1; i <= w.txt.length; i++) {
+            let txt = w.txt[i];
             let c = 6;
             if (w.col && w.col[i]) {
                 c = w.col[i];
             }
-            print(txt, wx, wy, c);
+            luaprint(txt, wx, wy, c);
             if (i === w.cur) {
-                spr(255, wx - 5 + sin(time()), wy);
+                spr(255, wx - 5 + Math.sin(time()), wy);
             }
             wy += 6;
         }
@@ -997,10 +1067,10 @@ function drawind() {
             }
         } else {
             if (w.butt) {
-                oprint8("❎", wx + ww - 15, wy - 1 + sin(time()), 6, 0);
+                oprint8("❎", wx + ww - 15, wy - 1 + Math.sin(time()), 6, 0);
             }
         }
-    }
+    })
 }
 
 function showmsg(txt, dur) {
@@ -1019,13 +1089,13 @@ function addfloat(_txt, _x, _y, _c) {
 }
 
 function dofloats() {
-    for (f in all(float)) {
+    float.forEach((f) => {
         f.y += (f.ty - f.y) / 10;
         f.t += 1;
         if (f.t > 70) {
             del(float, f);
         }
-    }
+    })
 }
 
 function dohpwind() {
@@ -1085,7 +1155,7 @@ function showinv() {
 
 function showuse() {
     let itm = invwind.cur < 3 && eqp[invwind.cur] || inv[invwind.cur - 3];
-    if (itm === nil) {
+    if (itm === null) {
         return;
     }
     let typ = itm_type[itm];
@@ -1117,9 +1187,9 @@ function triguse() {
 
     if (verb === "trash") {
         if (i < 3) {
-            eqp[i] = nil;
+            eqp[i] = null;
         } else {
-            inv[i - 3] = nil;
+            inv[i - 3] = null;
         }
     } else if (verb === "equip") {
         let slot = 2;
@@ -1166,7 +1236,7 @@ function floormsg() {
 function showhint() {
     if (hintwind) {
         hintwind.dur = 0;
-        hintwind = nil;
+        hintwind = null;
     }
 
     if (invwind.cur > 3) {
@@ -1252,10 +1322,10 @@ function mov_bump(self) {
 }
 
 function doai() {
-    let moving = false
-    for (m in all(mob)) {
+    let moving = false;
+    mob.forEach((m) => {
         if (m !== p_mob) {
-            m.mov = nil;
+            m.mov = null;
             if (m.stun) {
                 m.stun = false;
             } else {
@@ -1263,7 +1333,7 @@ function doai() {
                 moving = m.lastmoved || moving;
             }
         }
-    }
+    });
     if (moving) {
         _upd = update_aiturn;
         p_t = 0;
@@ -1351,7 +1421,7 @@ function cansee(m1, m2) {
 
 function spawnmobs() {
     mobpool = {};
-    for (let i = 2; i <= mob.length_name; i++) {
+    for (let i = 2; i <= mob_name.length; i++) {
         if (mob_minf[i] <= floor && mob_maxf[i] >= floor) {
             add(mobpool, i);
         }
@@ -1366,9 +1436,9 @@ function spawnmobs() {
     let placed = 0;
     let rpot = {};
 
-    for (r in all(rooms)) {
+    rooms.forEach(r => {
         add(rpot, r);
-    }
+    });
 
     do {
         let r = getrnd(rpot);
@@ -1433,7 +1503,7 @@ function makeipool() {
     ipool_rar = {};
     ipool_com = {};
 
-    for (let i = 1; i <= itm.length_name; i++) {
+    for (let i = 1; i <= itm_name.length; i++) {
         let t = itm_type[i];
         if (t === "wep" || t === "arm") {
             add(ipool_rar, i);
@@ -1447,21 +1517,21 @@ function makefipool() {
     fipool_rar = {};
     fipool_com = {};
 
-    for (i in all(ipool_rar)) {
+    ipool_rar.forEach((i) => {
         if (itm_minf[i] <= floor && itm_maxf[i] >= floor) {
             add(fipool_rar, i);
         }
-    }
+    });
 
-    for (i in all(ipool_com)) {
+    ipool_com.forEach((i) => {
         if (itm_minf[i] <= floor && itm_maxf[i] >= floor) {
             add(fipool_com, i);
         }
-    }
+    });
 }
 
 function getitm_rar() {
-    if (fipool.length_rar > 0) {
+    if (fipool_rar.length > 0) {
         let itm = getrnd(fipool_rar);
         del(fipool_rar, itm);
         del(ipool_rar, itm);
@@ -1478,9 +1548,10 @@ function foodnames() {
     let ad = null;
 
     itm_known = {};
-    for (let i = 1; i <= itm.length_name; i++) {
+    for (let i = 1; i <= itm_name.length; i++) {
         if (itm_type[i] === "fud") {
-            fu, ad = getrnd(fud), getrnd(adj);
+            fu = getrnd(fud);
+            ad = getrnd(adj);
             del(fud, fu);
             del(adj, ad);
             itm_name[i] = ad + " " + fu;
@@ -1549,19 +1620,19 @@ function genrooms() {
     let mh = 10;
 
     do {
-        let r = rndroom(mw, mh)
+        let r = rndroom(mw, mh);
         if (placeroom(r)) {
             if (rooms.length === 1) {
-                mw /= 2
-                mh /= 2
+                mw /= 2;
+                mh /= 2;
             }
-            rmax -= 1
+            rmax -= 1;
         } else {
-            fmax -= 1
+            fmax -= 1;
             if (r.w > r.h) {
-                mw = max(mw - 1, 3)
+                mw = Math.max(mw - 1, 3);
             } else {
-                mh = max(mh - 1, 3)
+                mh = Math.max(mh - 1, 3);
             }
         }
     } while (fmax <= 0 || rmax <= 0);
@@ -1673,7 +1744,7 @@ function cancarve(x, y, walk) {
     if (!inbounds(x, y)) {
         return false;
     }
-    walk = walk === nil && iswalkable(x, y) || walk;
+    walk = walk === null && iswalkable(x, y) || walk;
 
     if (iswalkable(x, y) === walk) {
         return sigarray(getsig(x, y), crv_sig, crv_msk) !== 0;
@@ -1687,7 +1758,8 @@ function bcomp(sig, match, mask) {
 }
 
 function getsig(x, y) {
-    let sig, digit = 0;
+    let sig = 0;
+    let digit;
     for (let i = 1; i <= 8; i++) {
         let dx = x + dirx[i];
         let dy = y + diry[i];
@@ -1717,7 +1789,7 @@ function sigarray(sig, arr, marr) {
 function placeflags() {
     let curf = 1;
     let flags = blankmap(0);
-    let flaglib = {};
+    flaglib = {};
     for (let _x = 0; _x <= 15; _x++) {
         for (let _y = 0; _y <= 15; _y++) {
             if (iswalkable(_x, _y) && flags[_x][_y] === 0) {
@@ -1737,7 +1809,7 @@ function growflag(_x, _y, flg) {
     flags[_x][_y] = flg;
     do {
         candnew = {};
-        for (c in all(cand)) {
+        cand.forEach(c => {
             for (let d = 1; d <= 4; d++) {
                 let dx = c.x + dirx[d];
                 let dy = c.y + diry[d];
@@ -1746,7 +1818,7 @@ function growflag(_x, _y, flg) {
                     add(candnew, {x: dx, y: dy});
                 }
             }
-        }
+        });
         cand = candnew;
     } while (cand.length === 0);
 }
@@ -1815,9 +1887,17 @@ function carvescuts() {
                     let sig = getsig(_x, _y);
                     found = false;
                     if (bcomp(sig, 0b11000000, 0b00001111)) {
-                        x1, y1, x2, y2, found = _x, _y - 1, _x, _y + 1, true
+                        x1 = _x;
+                        y1 = _y - 1;
+                        x2 = _x;
+                        y2 = _y + 1;
+                        found = true;
                     } else if (bcomp(sig, 0b00110000, 0b00001111)) {
-                        x1, y1, x2, y2, found = _x + 1, _y, _x - 1, _y, true
+                        x1 = _x + 1;
+                        y1 = _y;
+                        x2 = _x - 1;
+                        y2 = _y;
+                        found = true;
                     }
                     if (found) {
                         calcdist(x1, y1);
@@ -1835,7 +1915,7 @@ function carvescuts() {
             mset(d.x, d.y, 1);
             cut += 1;
         }
-    } while (drs.length === 0 || cut >= 3)
+    } while (drs.length === 0 || cut >= 3);
 }
 
 function fillends() {
@@ -1875,13 +1955,13 @@ function nexttoroom(x, y, dirs) {
 }
 
 function installdoors() {
-    for (d in all(doors)) {
+    doors.forEach(d => {
         let dx = d.x;
         let dy = d.y;
         if ((mget(dx, dy) === 1 || mget(dx, dy) === 4) && isdoor(dx, dy) && !next2tile(dx, dy, 13)) {
             mset(dx, dy, 13);
         }
-    }
+    });
 }
 
 ////////////////
@@ -2003,9 +2083,9 @@ function decorooms() {
     let func = deco_vase;
     let rpot = {};
 
-    for (let r in all(rooms)) {
+    rooms.forEach(r => {
         add(rpot, r);
-    }
+    });
 
     do {
         let r = getrnd(rpot);
@@ -2056,12 +2136,11 @@ function spawnchests() {
     let chestdice = explodeval("0,1,1,1,2,3");
     let rpot = {};
     let rare = true;
-    let place = null;
-    place = getrnd(chestdice);
+    let place = getrnd(chestdice);
 
-    for (let r in all(rooms)) {
+    rooms.forEach(r => {
         add(rpot, r);
-    }
+    });
 
     while (place > 0 && rpot.length > 0) {
         let r = getrnd(rpot);
