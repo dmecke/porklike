@@ -81,36 +81,36 @@ function _init() {
     t = 0;
     shake = 0;
 
-    dpal = explodeval("0,1,1,2,1,13,6,4,4,9,3,13,1,13,14");
+    dpal = [0, 1, 1, 2, 1, 13, 6, 4, 4, 9, 3, 13, 1, 13, 14];
 
-    dirx = explodeval("-1,1,0,0,1,1,-1,-1");
-    diry = explodeval("0,0,-1,1,-1,1,1,-1");
+    dirx = [-1, 1, 0, 0, 1, 1, -1, -1];
+    diry = [0, 0, -1, 1, -1, 1, 1, -1];
 
-    itm_name = explode("butter knife,cheese knife,paring knife,utility knife,chef's knife,meat cleaver,paper apron,cotton apron,rubber apron,leather apron,chef's apron,butcher's apron,food 1,food 2,food 3,food 4,food 5,food 6,spork,salad fork,fish fork,dinner fork");
-    itm_type = explode("wep,wep,wep,wep,wep,wep,arm,arm,arm,arm,arm,arm,fud,fud,fud,fud,fud,fud,thr,thr,thr,thr");
-    itm_stat1 = explodeval("1,2,3,4,5,6,0,0,0,0,1,2,1,2,3,4,5,6,1,2,3,4");
-    itm_stat2 = explodeval("0,0,0,0,0,0,1,2,3,4,3,3,0,0,0,0,0,0,0,0,0,0");
-    itm_minf = explodeval("1,2,3,4,5,6,1,2,3,4,5,6,1,1,1,1,1,1,1,2,3,4");
-    itm_maxf = explodeval("3,4,5,6,7,8,3,4,5,6,7,8,8,8,8,8,8,8,4,6,7,8");
-    itm_desc = explode(",,,,,,,,,,,, heals, heals a lot, increases hp, stuns, is cursed, is blessed,,,,");
+    itm_name = ["butter knife", "cheese knife", "paring knife", "utility knife", "chef's knife", "meat cleaver", "paper apron", "cotton apron", "rubber apron", "leather apron", "chef's apron", "butcher's apron", "food 1", "food 2", "food 3", "food 4", "food 5", "food 6", "spork", "salad fork", "fish fork", "dinner fork"];
+    itm_type = ["wep", "wep", "wep", "wep", "wep", "wep", "arm", "arm", "arm", "arm", "arm", "arm", "fud", "fud", "fud", "fud", "fud", "fud", "thr", "thr", "thr", "thr"];
+    itm_stat1 = [1, 2, 3, 4, 5, 6, 0, 0, 0, 0, 1, 2, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4];
+    itm_stat2 = [0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    itm_minf = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 1, 1, 1, 1, 1, 1, 2, 3, 4];
+    itm_maxf = [3, 4, 5, 6, 7, 8, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 8, 8, 4, 6, 7, 8];
+    itm_desc = ["", "", "", "", "", "", "", "", "", "", "", "", " heals", " heals a lot", " increases hp", " stuns", " is cursed", " is blessed", "", "", "", ""];
 
-    mob_name = explode("player,slime,melt,shoggoth,mantis-man,giant scorpion,ghost,golem,drake");
-    mob_ani = explodeval("240,192,196,200,204,208,212,216,220");
-    mob_atk = explodeval("1,1,2,1,2,3,3,5,5");
-    mob_hp = explodeval("5,1,2,3,3,4,5,14,8");
-    mob_los = explodeval("4,4,4,4,4,4,4,4,4");
-    mob_minf = explodeval("0,1,2,3,4,5,6,7,8");
-    mob_maxf = explodeval("0,3,4,5,6,7,8,8,8");
-    mob_spec = explode(",,,spawn?,fast?,stun,ghost,slow,");
+    mob_name = ["player", "slime", "melt", "shoggoth", "mantis-man", "giant scorpion", "ghost", "golem", "drake"];
+    mob_ani = [240, 192, 196, 200, 204, 208, 212, 216, 220];
+    mob_atk = [1, 1, 2, 1, 2, 3, 3, 5, 5];
+    mob_hp = [5, 1, 2, 3, 3, 4, 5, 14, 8];
+    mob_los = [4, 4, 4, 4, 4, 4, 4, 4, 4];
+    mob_minf = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    mob_maxf = [0, 3, 4, 5, 6, 7, 8, 8, 8];
+    mob_spec = ["", "", "", "spawn?", "fast?", "stun", "ghost", "slow", ""];
 
-    crv_sig = explodeval("255,214,124,179,233");
-    crv_msk = explodeval("0,9,3,12,6");
+    crv_sig = [255, 214, 124, 179, 233];
+    crv_msk = [0, 9, 3, 12, 6];
 
-    free_sig = explodeval("0,0,0,0,16,64,32,128,161,104,84,146");
-    free_msk = explodeval("8,4,2,1,6,12,9,3,10,5,10,5");
+    free_sig = [0, 0, 0, 0, 16, 64, 32, 128, 161, 104, 84, 146];
+    free_msk = [8, 4, 2, 1, 6, 12, 9, 3, 10, 5, 10, 5];
 
-    wall_sig = explodeval("251,233,253,84,146,80,16,144,112,208,241,248,210,177,225,120,179,0,124,104,161,64,240,128,224,176,242,244,116,232,178,212,247,214,254,192,48,96,32,160,245,250,243,249,246,252");
-    wall_msk = explodeval("0,6,0,11,13,11,15,13,3,9,0,0,9,12,6,3,12,15,3,7,14,15,0,15,6,12,0,0,3,6,12,9,0,9,0,15,15,7,15,14,0,0,0,0,0,0");
+    wall_sig = [251, 233, 253, 84, 146, 80, 16, 144, 112, 208, 241, 248, 210, 177, 225, 120, 179, 0, 124, 104, 161, 64, 240, 128, 224, 176, 242, 244, 116, 232, 178, 212, 247, 214, 254, 192, 48, 96, 32, 160, 245, 250, 243, 249, 246, 252];
+    wall_msk = [0, 6, 0, 11, 13, 11, 15, 13, 3, 9, 0, 0, 9, 12, 6, 3, 12, 15, 3, 7, 14, 15, 0, 15, 6, 12, 0, 0, 3, 6, 12, 9, 0, 9, 0, 15, 15, 7, 15, 14, 0, 0, 0, 0, 0, 0];
 
     startgame()
 }
@@ -146,7 +146,7 @@ function startgame() {
     skipai = false;
     win = false;
     winfloor = 9;
-    mob = {};
+    mob = [];
     dmob = [];
     p_mob = addmob(1, 1, 1);
 
@@ -256,7 +256,7 @@ function update_pturn() {
     p_t = Math.min(p_t + 0.125, 1);
 
     if (p_mob.mov) {
-        p_mob:mov();
+        p_mob.mov(p_mob);
     }
 
     if (p_t === 1) {
@@ -277,7 +277,7 @@ function update_aiturn() {
     p_t = Math.min(p_t + 0.125, 1);
     mob.forEach(m => {
         if (m !== p_mob && m.mov) {
-            m:mov();
+            m.mov(m);
         }
     });
     if (p_t === 1) {
@@ -349,7 +349,7 @@ function draw_game() {
     });
 
     for (let i = mob.length; i >= 1; i--) {
-        drawmob(mob[i]);
+        drawmob(mob[i - 1]);
     }
 
     if (_upd === update_throw) {
@@ -457,7 +457,7 @@ function animap() {
 //tools
 
 function getframe(ani) {
-    return ani[Math.floor(t / 15) % ani.length + 1];
+    return ani[Math.floor(t / 15) % ani.length];
 }
 
 function drawspr(_spr, _x, _y, _c, _flip) {
@@ -559,32 +559,6 @@ function copymap(x, y) {
     }
 }
 
-function explode(s) {
-    let retval = [];
-    let lastpos = 1;
-    for (let i = 1; i <= s.length; i++) {
-        if (sub(s, i, i) === ",") {
-            add(retval, sub(s, lastpos, i - 1));
-            i += 1;
-            lastpos = i;
-        }
-    }
-    add(retval, sub(s, lastpos, s.length));
-    return retval
-}
-
-function explodeval(_arr) {
-    return toval(explode(_arr));
-}
-
-function toval(_arr) {
-    let _retarr = {};
-    _arr.forEach(_i => {
-        add(_retarr, Math.floor(tonum(_i)));
-    });
-    return _retarr;
-}
-
 function doshake() {
     let shakex = 16 - rnd(32);
     let shakey = 16 - rnd(32);
@@ -675,7 +649,7 @@ function trig_bump(tle, destx, desty) {
         //stone tablet
         if (floor === 0) {
             sfx(54);
-            showtalk(explode(" welcome to porklike!,, climb this sausage, tower to obtain the, ultimate power of, the golden kielbasa,"));
+            showtalk([" welcome to porklike!", "", " climb this sausage", " tower to obtain the", " ultimate power of", " the golden kielbasa", ""]);
         }
     } else if (tle === 110) {
         //kielbasa
@@ -1108,8 +1082,8 @@ function dohpwind() {
 }
 
 function showinv() {
-    let txt = {};
-    let col = {};
+    let txt = [];
+    let col = [];
     let itm = null;
     let eqt = null;
     _upd = update_inv;
@@ -1261,7 +1235,7 @@ function addmob(typ, mx, my) {
         ox: 0,
         oy: 0,
         flp: false,
-        ani: {},
+        ani: [],
         flash: 0,
         stun: false,
         bless: 0,
@@ -1431,8 +1405,8 @@ function spawnmobs() {
         return;
     }
 
-    let minmons = explodeval("3,5,7,9,10,11,12,13");
-    let maxmons = explodeval("6,10,14,18,20,22,24,26");
+    let minmons = [3, 5, 7, 9, 10, 11, 12, 13];
+    let maxmons = [6, 10, 14, 18, 20, 22, 24, 26];
     let placed = 0;
     let rpot = {};
 
@@ -1542,9 +1516,9 @@ function getitm_rar() {
 }
 
 function foodnames() {
-    let fud = explode("jerky,schnitzel,steak,gyros,fricassee,haggis,mett,kebab,burger,meatball,pizza,calzone,pasticio,chops,hams,ribs,roast,meatloaf,chili,stew,pie,wrap,taco,burrito,rolls,filet,salami,sandwich,casserole,spam,souvlaki");
+    let fud = ["jerky", "schnitzel", "steak", "gyros", "fricassee", "haggis", "mett", "kebab", "burger", "meatball", "pizza", "calzone", "pasticio", "chops", "hams", "ribs", "roast", "meatloaf", "chili", "stew", "pie", "wrap", "taco", "burrito", "rolls", "filet", "salami", "sandwich", "casserole", "spam", "souvlaki"];
     let fu = null;
-    let adj = explode("yellow,green,blue,purple,black,sweet,salty,spicy,strange,old,dry,wet,smooth,soft,crusty,pickled,sour,leftover,mom's,steamed,hairy,smoked,mini,stuffed,classic,marinated,bbq,savory,baked,juicy,sloppy,cheesy,hot,cold,zesty");
+    let adj = ["yellow", "green", "blue", "purple", "black", "sweet", "salty", "spicy", "strange", "old", "dry", "wet", "smooth", "soft", "crusty", "pickled", "sour", "leftover", "mom's", "steamed", "hairy", "smoked", "mini", "stuffed", "classic", "marinated", "bbq", "savory", "baked", "juicy", "sloppy", "cheesy", "hot", "cold", "zesty"];
     let ad = null;
 
     itm_known = {};
@@ -1566,7 +1540,7 @@ function foodnames() {
 function genfloor(f) {
     floor = f;
     makefipool();
-    mob = {};
+    mob = [];
     add(mob, p_mob);
     fog = blankmap(0);
     if (floor === 1) {
@@ -2070,9 +2044,9 @@ function prettywalls() {
 }
 
 function decorooms() {
-    tarr_dirt = explodeval("1,74,75,76");
-    tarr_farn = explodeval("1,70,70,70,71,71,71,72,73,74");
-    tarr_vase = explodeval("1,1,7,8");
+    tarr_dirt = [1, 74, 75, 76];
+    tarr_farn = [1, 70, 70, 70, 71, 71, 71, 72, 73, 74];
+    tarr_vase = [1, 1, 7, 8];
     let funcs = {
         deco_dirt,
         deco_torch,
@@ -2133,7 +2107,7 @@ function deco_vase(r, tx, ty, x, y) {
 }
 
 function spawnchests() {
-    let chestdice = explodeval("0,1,1,1,2,3");
+    let chestdice = [0, 1, 1, 1, 2, 3];
     let rpot = {};
     let rare = true;
     let place = getrnd(chestdice);
