@@ -62,7 +62,7 @@ function fget(x, y) {
 
 function spr(tile, x, y, w, h, flip_x) {
     let img = new Image();
-    img.src = tile + '.png';
+    img.src = 'tiles/' + tile + '.png';
     ctx.drawImage(img, x, y, w * 8, h * 8);
 }
 
