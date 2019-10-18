@@ -147,7 +147,7 @@ function startgame() {
     win = false;
     winfloor = 9;
     mob = {};
-    dmob = {};
+    dmob = [];
     p_mob = addmob(1, 1, 1);
 
     p_t = 0;
@@ -157,8 +157,8 @@ function startgame() {
     makeipool();
     foodnames();
 
-    wind = {};
-    float = {};
+    wind = [];
+    float = [];
 
     talkwind = null;
 
@@ -279,7 +279,7 @@ function update_aiturn() {
         if (m !== p_mob && m.mov) {
             m:mov();
         }
-    })
+    });
     if (p_t === 1) {
         _upd = update_game;
         if (checkend()) {
@@ -339,7 +339,7 @@ function draw_game() {
     animap();
     map();
     dmob.forEach(m => {
-        if (sin(time() * 8) > 0 || m === p_mob) {
+        if (Math.sin(time() * 8) > 0 || m === p_mob) {
             drawmob(m);
         }
         m.dur -= 1;
@@ -560,7 +560,7 @@ function copymap(x, y) {
 }
 
 function explode(s) {
-    let retval = {};
+    let retval = [];
     let lastpos = 1;
     for (let i = 1; i <= s.length; i++) {
         if (sub(s, i, i) === ",") {
@@ -1500,8 +1500,8 @@ function freeinvslot() {
 }
 
 function makeipool() {
-    ipool_rar = {};
-    ipool_com = {};
+    ipool_rar = [];
+    ipool_com = [];
 
     for (let i = 1; i <= itm_name.length; i++) {
         let t = itm_type[i];
@@ -1514,8 +1514,8 @@ function makeipool() {
 }
 
 function makefipool() {
-    fipool_rar = {};
-    fipool_com = {};
+    fipool_rar = [];
+    fipool_com = [];
 
     ipool_rar.forEach((i) => {
         if (itm_minf[i] <= floor && itm_maxf[i] >= floor) {
