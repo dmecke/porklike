@@ -59,8 +59,24 @@ function camera(x, y) {
     // todo
 }
 
-function fget(x, y) {
-    // todo
+function fget(tile, flag) {
+    switch (flag) {
+        case 0: // collision / not walkable
+            if (tile >= 16 && tile <= 61) {
+                return true;
+            }
+            return [2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 77, 78, 79, 93, 94, 95, 109, 110, 111].indexOf(tile) !== -1;
+
+        case 1: // can be interacted with
+            return [6, 7, 8, 10, 12, 13, 14, 110].indexOf(tile) !== -1;
+
+        case 2: // blocks line of sight
+            if (tile >= 16 && tile <= 61) {
+                return true;
+            }
+            return [2, 3, 5, 13, 70, 71].indexOf(tile) !== -1;
+    }
+    throw Error('unknown flag');
 }
 
 function spr(tile, x, y, w = 1, h = 1, flip_x = false) {
