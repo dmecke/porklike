@@ -164,10 +164,10 @@ function mid(first, second, third) {
     return [first, second, third].sort()[1];
 }
 
-function bor(value1, value2) {
-    // todo
+function bor(first, second) {
+    return first | second;
 }
 
-function shl(value) {
-    // todo
+function shl(num, bits) {
+    return num << bits;
 }
