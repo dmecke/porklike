@@ -256,13 +256,14 @@ function luaprint(text, x, y, color) {
         '▥': { x: 72, y: 72 },
     };
 
-    let width = 4;
     let height = 6;
 
     ctx.fillStyle = getColor(color);
     for (let i = 0; i < text.length; i++) {
         let letterData = data[text[i]];
-        ctx.drawImage(bitmapFont, letterData.x, letterData.y, width, height, x + width * i, y, width, height);
+        let width = letterData.y >= 64 ? 8 : 4;
+        ctx.drawImage(bitmapFont, letterData.x, letterData.y, width, height, x, y, width, height);
+        x += width;
     }
 }
 

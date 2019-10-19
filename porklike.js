@@ -165,7 +165,7 @@ function startgame() {
 
     talkwind = null;
 
-    hpwind = addwind(5, 5, 28, 13, {});
+    hpwind = addwind(5, 5, 28, 13, []);
 
     thrdx = 0;
     thrdy = -1;
@@ -1071,7 +1071,7 @@ function dofloats() {
 }
 
 function dohpwind() {
-    hpwind.txt[1] = "♥" + p_mob.hp + "/" + p_mob.hpmax;
+    hpwind.txt[0] = "♥" + p_mob.hp + "/" + p_mob.hpmax;
     let hpy = 5;
     if (p_mob.y < 8) {
         hpy = 110;
@@ -1216,7 +1216,7 @@ function showhint() {
 
         if (itm && itm_type[itm] === "fud") {
             let txt = itm_known[itm] ? itm_name[itm] + itm_desc[itm] : "???";
-            hintwind = addwind(5, 78, txt.length * 4 + 7, 13, {txt});
+            hintwind = addwind(5, 78, txt.length * 4 + 7, 13, [txt]);
         }
 
     }
