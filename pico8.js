@@ -108,7 +108,11 @@ function add(array, element) {
 }
 
 function del(array, element) {
-    array.splice(array.indexOf(element));
+    let index = array.indexOf(element);
+    if (index === -1) {
+        throw new Error('could not delete "' + element + '" from array [' + array + '] - element does not exist');
+    }
+    array.splice(index, 1);
 }
 
 function rnd(max) {
