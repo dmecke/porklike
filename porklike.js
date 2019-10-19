@@ -1395,9 +1395,9 @@ function cansee(m1, m2) {
 
 function spawnmobs() {
     mobpool = [];
-    for (let i = 2; i <= mob_name.length; i++) {
+    for (let i = 1; i < mob_name.length; i++) {
         if (mob_minf[i] <= floor && mob_maxf[i] >= floor) {
-            add(mobpool, i);
+            add(mobpool, i + 1);
         }
     }
 
