@@ -1013,7 +1013,7 @@ function drawind() {
         if (w.cur) {
             wx += 6;
         }
-        for (let i = 1; i <= w.txt.length; i++) {
+        for (let i = 0; i < w.txt.length; i++) {
             let txt = w.txt[i];
             let c = 6;
             if (w.col && w.col[i]) {
