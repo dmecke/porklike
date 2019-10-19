@@ -421,12 +421,10 @@ function drawmob(m) {
 
 function draw_gover() {
     cls();
-    palt(12, true);
     spr(gover_spr, gover_x, 30, gover_w, 2);
     if (!win) {
         luaprint("killed by a " + st_killer, 28, 43, 6);
     }
-    palt();
     let y = 56;
     if (!win) {
         luaprint("floor: " + floor, 40, 56, 5);
