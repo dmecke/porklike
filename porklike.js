@@ -299,7 +299,7 @@ function update_aiturn() {
 }
 
 function update_gover() {
-    if (btnp("❎")) {
+    if (btnp(5)) {
         sfx(54);
         fadeout();
         startgame();
