@@ -708,6 +708,9 @@ function inbounds(x, y) {
 }
 
 function hitmob(atkm, defm, rawdmg) {
+    if (defm.hp <= 0) {
+        return; // is already dead
+    }
     let dmg = atkm ? atkm.atk : rawdmg;
 
     //add curse/bless
