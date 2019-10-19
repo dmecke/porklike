@@ -47,10 +47,6 @@ function map(color) {
     }
 }
 
-function camera(x, y) {
-    // todo
-}
-
 function fget(tile, flag) {
     switch (flag) {
         case 0: // collision / not walkable

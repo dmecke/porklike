@@ -127,11 +127,13 @@ function _update60() {
 }
 
 function _draw() {
+    ctx.save();
     doshake();
     _drw();
     drawind();
     drawlogo();
     checkfade();
+    ctx.restore();
 }
 
 function startgame() {
@@ -561,7 +563,7 @@ function copymap(x, y) {
 function doshake() {
     let shakex = 16 - rnd(32);
     let shakey = 16 - rnd(32);
-    camera(shakex * shake, shakey * shake);
+    ctx.translate(shakex * shake, shakey * shake);
     shake *= 0.95;
     if (shake < 0.05) {
         shake = 0;
