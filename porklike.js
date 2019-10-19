@@ -1723,7 +1723,7 @@ function cancarve(x, y, walk) {
     if (!inbounds(x, y)) {
         return false;
     }
-    walk = walk === null ? iswalkable(x, y) : walk;
+    walk = walk !== null ? walk : iswalkable(x, y);
 
     if (iswalkable(x, y) === walk) {
         return sigarray(getsig(x, y), crv_sig, crv_msk) !== 0;
@@ -1980,7 +1980,7 @@ function startend() {
     for (let x = 0; x <= 15; x++) {
         for (let y = 0; y <= 15; y++) {
             let tmp = distmap[x][y];
-            if (tmp > high && cancarve(x, y)) {
+            if (tmp > high && cancarve(x, y, null)) {
                 ex = x;
                 ey = y;
                 high = tmp;
@@ -2019,7 +2019,7 @@ function starscore(x, y) {
         }
         if (freestanding(x, y) > 0) {
             return 5;
-        } else if (cancarve(x, y)) {
+        } else if (cancarve(x, y, null)) {
             return 0;
         }
     } else {
