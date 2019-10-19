@@ -155,8 +155,8 @@ function startgame() {
 
     p_t = 0;
 
-    inv = {};
-    eqp = {};
+    inv = [];
+    eqp = [];
     makeipool();
     foodnames();
 
@@ -508,7 +508,7 @@ function wait(_wait) {
     do {
         _wait -= 1;
         flip();
-    } while (_wait < 0);
+    } while (_wait >= 0);
 }
 
 function fadeout(spd, _wait) {
@@ -522,7 +522,7 @@ function fadeout(spd, _wait) {
         fadeperc = Math.min(fadeperc + spd, 1);
         dofade();
         flip();
-    } while (fadeperc === 1);
+    } while (fadeperc !== 1);
     wait(_wait);
 }
 
@@ -793,7 +793,7 @@ function checkend() {
 }
 
 function showgover() {
-    wind = {};
+    wind = [];
     _upd = update_gover;
     _drw = draw_gover;
     fadeout(0.02);
@@ -872,7 +872,7 @@ function unfogtile(x, y) {
 }
 
 function calcdist(tx, ty) {
-    let cand = {};
+    let cand = [];
     let step = 0;
     let candnew = null;
     distmap = blankmap(-1);
@@ -880,7 +880,7 @@ function calcdist(tx, ty) {
     distmap[tx][ty] = 0;
     do {
         step += 1;
-        candnew = {};
+        candnew = [];
         cand.forEach(c => {
             for (let d = 1; d <= 4; d++) {
                 let dx = c.x + dirx[d];
@@ -894,7 +894,7 @@ function calcdist(tx, ty) {
             }
         });
         cand = candnew;
-    } while (cand.length === 0);
+    } while (cand.length > 0);
 }
 
 function updatestats() {
@@ -980,7 +980,7 @@ function throwtile() {
     do {
         tx += thrdx;
         ty += thrdy;
-    } while (!iswalkable(tx, ty, "checkmobs"));
+    } while (iswalkable(tx, ty, "checkmobs"));
 
     return {x: tx, y: ty};
 }
@@ -1133,7 +1133,7 @@ function showuse() {
         return;
     }
     let typ = itm_type[itm];
-    let txt = {};
+    let txt = [];
 
     if ((typ === "wep" || typ === "arm") && invwind.cur > 3) {
         add(txt, "equip");
@@ -1361,7 +1361,7 @@ function ai_attac(m) {
                 return false;
             }
             let bdst = 999;
-            let cand = {};
+            let cand = [];
             calcdist(m.tx, m.ty);
             for (let i = 1; i <= 4; i++) {
                 let dx = dirx[i];
@@ -1371,7 +1371,7 @@ function ai_attac(m) {
                 if (iswalkable(tx, ty, "checkmobs")) {
                     let dst = distmap[tx][ty];
                     if (dst < bdst) {
-                        cand = {};
+                        cand = [];
                         bdst = dst;
                     }
                     if (dst === bdst) {
@@ -1394,7 +1394,7 @@ function cansee(m1, m2) {
 }
 
 function spawnmobs() {
-    mobpool = {};
+    mobpool = [];
     for (let i = 2; i <= mob_name.length; i++) {
         if (mob_minf[i] <= floor && mob_maxf[i] >= floor) {
             add(mobpool, i);
@@ -1408,7 +1408,7 @@ function spawnmobs() {
     let minmons = [3, 5, 7, 9, 10, 11, 12, 13];
     let maxmons = [6, 10, 14, 18, 20, 22, 24, 26];
     let placed = 0;
-    let rpot = {};
+    let rpot = [];
 
     rooms.forEach(r => {
         add(rpot, r);
@@ -1418,7 +1418,7 @@ function spawnmobs() {
         let r = getrnd(rpot);
         placed += infestroom(r);
         del(rpot, r);
-    } while (rpot.length === 0 || placed > maxmons[floor]);
+    } while (rpot.length > 0 && placed <= maxmons[floor]);
 
     if (placed < minmons[floor]) {
         do {
@@ -1426,10 +1426,10 @@ function spawnmobs() {
             do {
                 x = Math.floor(rnd(16));
                 y = Math.floor(rnd(16));
-            } while (iswalkable(x, y, "checkmobs") && (mget(x, y) === 1 || mget(x, y) === 4));
+            } while (!iswalkable(x, y, "checkmobs") || !(mget(x, y) === 1 || mget(x, y) === 4));
             addmob(getrnd(mobpool), x, y);
             placed += 1;
-        } while (placed >= minmons[floor]);
+        } while (placed < minmons[floor]);
     }
 }
 
@@ -1444,7 +1444,7 @@ function infestroom(r) {
         do {
             x = r.x + Math.floor(rnd(r.w));
             y = r.y + Math.floor(rnd(r.h));
-        } while (iswalkable(x, y, "checkmobs") && (mget(x, y) === 1 || mget(x, y) === 4));
+        } while (!iswalkable(x, y, "checkmobs") || !(mget(x, y) === 1 || mget(x, y) === 4));
         addmob(getrnd(mobpool), x, y);
     }
 
@@ -1521,7 +1521,7 @@ function foodnames() {
     let adj = ["yellow", "green", "blue", "purple", "black", "sweet", "salty", "spicy", "strange", "old", "dry", "wet", "smooth", "soft", "crusty", "pickled", "sour", "leftover", "mom's", "steamed", "hairy", "smoked", "mini", "stuffed", "classic", "marinated", "bbq", "savory", "baked", "juicy", "sloppy", "cheesy", "hot", "cold", "zesty"];
     let ad = null;
 
-    itm_known = {};
+    itm_known = [];
     for (let i = 1; i <= itm_name.length; i++) {
         if (itm_type[i] === "fud") {
             fu = getrnd(fud);
@@ -1561,14 +1561,18 @@ function genfloor(f) {
 function mapgen() {
     do {
         copymap(48, 0);
-        rooms = {};
+        rooms = [];
         roomap = blankmap(0);
-        doors = {};
+        doors = [];
         genrooms();
+        console.log(2);
         mazeworm();
+        console.log(3);
         placeflags();
+        console.log(4);
         carvedoors();
-    } while (flaglib.length === 1);
+        console.log(5);
+    } while (flaglib.length > 1);
 
     carvescuts();
     startend();
@@ -1609,7 +1613,7 @@ function genrooms() {
                 mh = Math.max(mh - 1, 3);
             }
         }
-    } while (fmax <= 0 || rmax <= 0);
+    } while (fmax > 0 && rmax > 0);
 }
 
 function rndroom(mw, mh) {
@@ -1626,7 +1630,7 @@ function rndroom(mw, mh) {
 }
 
 function placeroom(r) {
-    let cand = {};
+    let cand = [];
     let c;
 
     for (let _x = 0; _x <= 16 - r.w; _x++) {
@@ -1671,8 +1675,10 @@ function doesroomfit(r, x, y) {
 ////////////////
 
 function mazeworm() {
+    let cand;
+    console.log('mazeworm start');
     do {
-        let cand = {};
+        cand = [];
         for (let _x = 0; _x <= 15; _x++) {
             for (let _y = 0; _y <= 15; _y++) {
                 if (cancarve(_x, _y, false) && !nexttoroom(_x, _y)) {
@@ -1685,7 +1691,9 @@ function mazeworm() {
             let c = getrnd(cand);
             digworm(c.x, c.y);
         }
-    } while (cand.length <= 1);
+        console.log(cand.length);
+    } while (cand.length > 1);
+    console.log('mazeworm end');
 }
 
 function digworm(x, y) {
@@ -1696,7 +1704,7 @@ function digworm(x, y) {
         mset(x, y, 1);
         if (!cancarve(x + dirx[dr], y + diry[dr], false) || (rnd() < 0.5 && stp > 2)) {
             stp = 0;
-            let cand = {};
+            let cand = [];
             for (let i = 1; i <= 4; i++) {
                 if (cancarve(x + dirx[i], y + diry[i], false)) {
                     add(cand, i);
@@ -1711,7 +1719,7 @@ function digworm(x, y) {
         x += dirx[dr];
         y += diry[dr];
         stp += 1;
-    } while (dr === 8);
+    } while (dr !== 8);
 }
 
 function cancarve(x, y, walk) {
@@ -1763,7 +1771,7 @@ function sigarray(sig, arr, marr) {
 function placeflags() {
     let curf = 1;
     let flags = blankmap(0);
-    flaglib = {};
+    flaglib = [];
     for (let _x = 0; _x <= 15; _x++) {
         for (let _y = 0; _y <= 15; _y++) {
             if (iswalkable(_x, _y) && flags[_x][_y] === 0) {
@@ -1782,7 +1790,7 @@ function growflag(_x, _y, flg) {
     let candnew = null;
     flags[_x][_y] = flg;
     do {
-        candnew = {};
+        candnew = [];
         cand.forEach(c => {
             for (let d = 1; d <= 4; d++) {
                 let dx = c.x + dirx[d];
@@ -1794,7 +1802,7 @@ function growflag(_x, _y, flg) {
             }
         });
         cand = candnew;
-    } while (cand.length === 0);
+    } while (cand.length > 0);
 }
 
 function carvedoors() {
@@ -1807,7 +1815,7 @@ function carvedoors() {
     let _f2 = null;
     let drs = null;
     do {
-        drs = {};
+        drs = [];
         for (let _x = 0; _x <= 15; _x++) {
             for (let _y = 0; _y <= 15; _y++) {
                 if (!iswalkable(_x, _y)) {
@@ -1842,7 +1850,7 @@ function carvedoors() {
             growflag(d.x, d.y, d.f1);
             del(flaglib, d.f2);
         }
-    } while (drs.length === 0);
+    } while (drs.length > 0);
 }
 
 function carvescuts() {
@@ -1854,7 +1862,7 @@ function carvescuts() {
     let found = null;
     let drs = null;
     do {
-        drs = {};
+        drs = [];
         for (let _x = 0; _x <= 15; _x++) {
             for (let _y = 0; _y <= 15; _y++) {
                 if (!iswalkable(_x, _y)) {
@@ -1889,7 +1897,7 @@ function carvescuts() {
             mset(d.x, d.y, 1);
             cut += 1;
         }
-    } while (drs.length === 0 || cut >= 3);
+    } while (drs.length > 0 && cut < 3);
 }
 
 function fillends() {
@@ -1905,7 +1913,7 @@ function fillends() {
                 }
             }
         }
-    } while (!filled);
+    } while (filled);
 }
 
 function isdoor(x, y) {
@@ -1949,7 +1957,7 @@ function startend() {
     do {
         px = Math.floor(rnd(16));
         py = Math.floor(rnd(16));
-    } while (iswalkable(px, py));
+    } while (!iswalkable(px, py));
     calcdist(px, py);
     for (let x = 0; x <= 15; x++) {
         for (let y = 0; y <= 15; y++) {
@@ -2055,7 +2063,7 @@ function decorooms() {
         deco_vase
     };
     let func = deco_vase;
-    let rpot = {};
+    let rpot = [];
 
     rooms.forEach(r => {
         add(rpot, r);
@@ -2072,7 +2080,7 @@ function decorooms() {
             }
         }
         func = getrnd(funcs);
-    } while (rpot.length === 0);
+    } while (rpot.length > 0);
 }
 
 function deco_torch(r, tx, ty, x, y) {
@@ -2108,7 +2116,7 @@ function deco_vase(r, tx, ty, x, y) {
 
 function spawnchests() {
     let chestdice = [0, 1, 1, 1, 2, 3];
-    let rpot = {};
+    let rpot = [];
     let rare = true;
     let place = getrnd(chestdice);
 
@@ -2130,7 +2138,7 @@ function placechest(r, rare) {
     do {
         x = r.x + Math.floor(rnd(r.w - 2)) + 1;
         y = r.y + Math.floor(rnd(r.h - 2)) + 1;
-    } while (mget(x, y) === 1);
+    } while (mget(x, y) !== 1);
     mset(x, y, rare && 12 || 10);
 }
 
