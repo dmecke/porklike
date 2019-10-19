@@ -118,9 +118,6 @@ function rnd(max) {
 }
 
 function luaprint(text, x, y, color) {
-    let bitmapFont = new Image();
-    bitmapFont.src = 'pico8_font.png';
-
     let data = {
         ' ': { x: 0, y: 16 },
         '!': { x: 8, y: 16 },
@@ -256,11 +253,10 @@ function luaprint(text, x, y, color) {
 
     let height = 6;
 
-    ctx.fillStyle = getColor(color);
     for (let i = 0; i < text.length; i++) {
         let letterData = data[text[i]];
         let width = letterData.y >= 64 ? 8 : 4;
-        ctx.drawImage(bitmapFont, letterData.x, letterData.y, width, height, x, y, width, height);
+        ctx.drawImage(bitmapFont[color], letterData.x, letterData.y, width, height, x, y, width, height);
         x += width;
     }
 }

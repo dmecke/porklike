@@ -1,6 +1,7 @@
 var ctx;
 var keys = {};
 var images = {};
+var bitmapFont = {};
 
 window.addEventListener('load', () => {
     ctx = document.getElementById('canvas').getContext('2d');
@@ -8,6 +9,24 @@ window.addEventListener('load', () => {
         images[i] = new Image();
         images[i].src = 'tiles/' + i + '.png';
     }
+
+    bitmapFont[0] = new Image();
+    bitmapFont[0].src = 'pico8_font_0.png';
+
+    bitmapFont[5] = new Image();
+    bitmapFont[5].src = 'pico8_font_5.png';
+
+    bitmapFont[6] = new Image();
+    bitmapFont[6].src = 'pico8_font_6.png';
+
+    bitmapFont[7] = new Image();
+    bitmapFont[7].src = 'pico8_font_7.png';
+
+    bitmapFont[9] = new Image();
+    bitmapFont[9].src = 'pico8_font_9.png';
+
+    bitmapFont[10] = new Image();
+    bitmapFont[10].src = 'pico8_font_10.png';
 
     _init();
     setInterval(() => {

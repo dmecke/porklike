@@ -1062,13 +1062,13 @@ function addfloat(_txt, _x, _y, _c) {
 }
 
 function dofloats() {
-    float.forEach((f) => {
+    float.forEach(f => {
         f.y += (f.ty - f.y) / 10;
         f.t += 1;
         if (f.t > 70) {
             del(float, f);
         }
-    })
+    });
 }
 
 function dohpwind() {
