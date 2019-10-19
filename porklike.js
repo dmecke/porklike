@@ -229,8 +229,8 @@ function update_inv() {
 function update_throw() {
     let b = getbutt();
     if (b >= 0 && b <= 3) {
-        thrdx = dirx[b + 1];
-        thrdy = diry[b + 1];
+        thrdx = dirx[b];
+        thrdy = diry[b];
     }
     if (b === 4) {
         _upd = update_game;
@@ -371,12 +371,13 @@ function draw_game() {
 
         let thrani = Math.floor(t / 7) % 2 === 0;
         let mb = getmob(tx, ty);
+        let pattern;
         if (thrani) {
-            fillp(0b1010010110100101);
+            pattern = [1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1];
         } else {
-            fillp(0b0101101001011010);
+            pattern = [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0];
         }
-        line(lx1, ly1, lx2, ly2, 7);
+        line(lx1, ly1, lx2, ly2, 7, pattern);
         fillp();
         oprint8("+", lx2 - 1, ly2 - 2, 7, 0);
 
