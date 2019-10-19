@@ -542,7 +542,7 @@ function blankmap(_dflt) {
 }
 
 function getrnd(arr) {
-    return arr[1 + Math.floor(rnd(arr.length))];
+    return arr[Math.floor(rnd(arr.length))];
 }
 
 function copymap(x, y) {
