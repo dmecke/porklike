@@ -2,14 +2,6 @@ function sfx(track) {
     // todo
 }
 
-function cursor(x, y) {
-    // todo
-}
-
-function color(color) {
-    // todo
-}
-
 function poke(position) {
     // todo
 }

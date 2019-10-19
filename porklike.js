@@ -132,9 +132,6 @@ function _draw() {
     drawind();
     drawlogo();
     checkfade();
-
-    cursor(4, 4);
-    color(8);
 }
 
 function startgame() {
@@ -423,16 +420,16 @@ function draw_gover() {
         luaprint("killed by a " + st_killer, 28, 43, 6);
     }
     palt();
-    color(5);
-    cursor(40, 56);
+    let y = 56;
     if (!win) {
-        luaprint("floor: " + floor);
+        luaprint("floor: " + floor, 40, 56, 5);
+        y++;
     }
-    luaprint("steps: " + st_steps);
-    luaprint("kills: " + st_kills);
-    luaprint("meals: " + st_meals);
+    luaprint("steps: " + st_steps, 40, y, 5);
+    luaprint("kills: " + st_kills, 40, y + 1, 5);
+    luaprint("meals: " + st_meals, 40, y + 2, 5);
 
-    luaprint("press ❎", 46, 90, 5 + Math.abs(Math.sin(time() / 100 / 3) * 2));
+    luaprint("press ❎", 46, 90, 5 + Math.floor(Math.abs(Math.sin(time() / 100 / 3) * 2)));
 }
 
 function animap() {
