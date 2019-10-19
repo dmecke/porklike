@@ -123,6 +123,7 @@ function _update60() {
     _upd();
     dofloats();
     dohpwind();
+    keys = {};
 }
 
 function _draw() {

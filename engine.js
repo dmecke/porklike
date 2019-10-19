@@ -18,11 +18,8 @@ window.addEventListener('load', () => {
     }, 1000 / 60);
 });
 
-window.addEventListener('keydown', event => {
-    keys[event.code] = true;
-});
 window.addEventListener('keyup', event => {
-    keys[event.code] = false;
+    keys[event.code] = true;
 });
 
 function getColor(color) {
