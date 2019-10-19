@@ -681,7 +681,7 @@ function getmob(x, y) {
 }
 
 function iswalkable(x, y, mode) {
-    mode = mode || "test";
+    mode = mode ? mode : "test";
 
     //sight
     if (inbounds(x, y)) {
@@ -705,7 +705,7 @@ function inbounds(x, y) {
 }
 
 function hitmob(atkm, defm, rawdmg) {
-    let dmg = atkm && atkm.atk || rawdmg;
+    let dmg = atkm ? atkm.atk : rawdmg;
 
     //add curse/bless
     if (defm.bless < 0) {
@@ -723,7 +723,7 @@ function hitmob(atkm, defm, rawdmg) {
 
     addfloat("-" + dmg, defm.x * 8, defm.y * 8, 9);
 
-    shake = defm === p_mob && 0.08 || 0.04;
+    shake = defm === p_mob ? 0.08 : 0.04;
 
     if (defm.hp <= 0) {
         if (defm !== p_mob) {
@@ -1093,7 +1093,7 @@ function showinv() {
             eqt = itm_name[itm];
             add(col, 6);
         } else {
-            eqt = i === 1 && "[weapon]" || "[armor]";
+            eqt = i === 1 ? "[weapon]" : "[armor]";
             add(col, 5);
         }
         add(txt, eqt);
@@ -1128,7 +1128,7 @@ function showinv() {
 }
 
 function showuse() {
-    let itm = invwind.cur < 3 && eqp[invwind.cur] || inv[invwind.cur - 3];
+    let itm = invwind.cur < 3 ? eqp[invwind.cur] : inv[invwind.cur - 3];
     if (itm === null) {
         return;
     }
@@ -1157,7 +1157,7 @@ function triguse() {
     let verb = usewind.txt[usewind.cur];
     let i = invwind.cur;
     let back = true;
-    let itm = i < 3 && eqp[i] || inv[i - 3];
+    let itm = i < 3 ? eqp[i] : inv[i - 3];
 
     if (verb === "trash") {
         if (i < 3) {
@@ -1217,7 +1217,7 @@ function showhint() {
         let itm = inv[invwind.cur - 3];
 
         if (itm && itm_type[itm] === "fud") {
-            let txt = itm_known[itm] && itm_name[itm] + itm_desc[itm] || "???";
+            let txt = itm_known[itm] ? itm_name[itm] + itm_desc[itm] : "???";
             hintwind = addwind(5, 78, txt.length * 4 + 7, 13, {txt});
         }
 
@@ -1280,7 +1280,7 @@ function mobbump(mb, dx, dy) {
 }
 
 function mobflip(mb, dx) {
-    mb.flp = dx === 0 && mb.flp || dx < 0;
+    mb.flp = dx === 0 ? mb.flp : dx < 0;
 }
 
 function mov_walk(self) {
@@ -1290,7 +1290,7 @@ function mov_walk(self) {
 }
 
 function mov_bump(self) {
-    let tme = p_t > 0.5 && 1 - p_t || p_t;
+    let tme = p_t > 0.5 ? 1 - p_t : p_t;
     self.ox = self.sox * tme;
     self.oy = self.soy * tme;
 }
@@ -1552,7 +1552,7 @@ function genfloor(f) {
     } else if (floor === winfloor) {
         copymap(32, 0);
     } else {
-        fog = blankmap(1);
+        // fog = blankmap(1);
         mapgen();
         unfog();
     }
@@ -1568,6 +1568,10 @@ function mapgen() {
         mazeworm();
         placeflags();
         carvedoors();
+        if (flaglib.length > 1) {
+            console.error('could not generate map - not all rooms could be connected');
+            return;
+        }
     } while (flaglib.length > 1);
 
     carvescuts();
@@ -1719,7 +1723,7 @@ function cancarve(x, y, walk) {
     if (!inbounds(x, y)) {
         return false;
     }
-    walk = walk === null && iswalkable(x, y) || walk;
+    walk = walk === null ? iswalkable(x, y) : walk;
 
     if (iswalkable(x, y) === walk) {
         return sigarray(getsig(x, y), crv_sig, crv_msk) !== 0;
@@ -1728,7 +1732,7 @@ function cancarve(x, y, walk) {
 }
 
 function bcomp(sig, match, mask) {
-    mask = mask && mask || 0;
+    mask = mask ? mask : 0;
     return bor(sig, mask) === bor(match, mask);
 }
 
@@ -1925,7 +1929,7 @@ function isdoor(x, y) {
 }
 
 function nexttoroom(x, y, dirs) {
-    dirs = dirs || 4;
+    dirs = dirs ? dirs : 4;
     for (let i = 1; i <= dirs; i++) {
         if (inbounds(x + dirx[i], y + diry[i]) && roomap[x + dirx[i]][y + diry[i]] !== 0) {
             return true;
@@ -2018,7 +2022,7 @@ function starscore(x, y) {
     } else {
         let scr = freestanding(x, y);
         if (scr > 0) {
-            return scr <= 8 && 3 || 0;
+            return scr <= 8 ? 3 : 0;
         }
     }
     return -1
@@ -2039,7 +2043,7 @@ function prettywalls() {
             let tle = mget(x, y);
             if (tle === 2) {
                 let ntle = sigarray(getsig(x, y), wall_sig, wall_msk);
-                tle = ntle === 0 && 3 || 15 + ntle;
+                tle = ntle === 0 ? 3 : 15 + ntle;
                 mset(x, y, tle);
             } else if (tle === 1) {
                 if (!iswalkable(x, y - 1)) {
@@ -2138,7 +2142,7 @@ function placechest(r, rare) {
         x = r.x + Math.floor(rnd(r.w - 2)) + 1;
         y = r.y + Math.floor(rnd(r.h - 2)) + 1;
     } while (mget(x, y) !== 1);
-    mset(x, y, rare && 12 || 10);
+    mset(x, y, rare ? 12 : 10);
 }
 
 function freestanding(x, y) {
