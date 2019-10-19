@@ -2061,13 +2061,13 @@ function decorooms() {
     tarr_dirt = [1, 74, 75, 76];
     tarr_farn = [1, 70, 70, 70, 71, 71, 71, 72, 73, 74];
     tarr_vase = [1, 1, 7, 8];
-    let funcs = {
+    let funcs = [
         deco_dirt,
         deco_torch,
         deco_carpet,
         deco_farn,
         deco_vase
-    };
+    ];
     let func = deco_vase;
     let rpot = [];
 
