@@ -1001,7 +1001,7 @@ function addwind(_x, _y, _w, _h, _txt) {
 }
 
 function drawind() {
-    wind.forEach((w) => {
+    wind.forEach(w => {
         let wx = w.x;
         let wy = w.y;
         let ww = w.w;
@@ -1029,7 +1029,7 @@ function drawind() {
         }
         clip();
 
-        if (w.dur) {
+        if (w.dur !== undefined) {
             w.dur -= 1;
             if (w.dur <= 0) {
                 let dif = w.h / 4;
