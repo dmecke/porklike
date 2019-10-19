@@ -92,11 +92,11 @@ function add(array, element) {
 }
 
 function del(array, element) {
-    // todo
+    array.splice(array.indexOf(element));
 }
 
-function rnd(value) {
-    // todo
+function rnd(max) {
+    return Math.floor(Math.random() * max);
 }
 
 function luaprint(text, x, y, color) {
@@ -144,8 +144,8 @@ function flip() {
     // todo
 }
 
-function mid(value1, value2, value3) {
-    // todo
+function mid(first, second, third) {
+    return [first, second, third].sort()[1];
 }
 
 function bor(value1, value2) {
