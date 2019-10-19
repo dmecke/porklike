@@ -1001,10 +1001,10 @@ function addwind(_x, _y, _w, _h, _txt) {
 
 function drawind() {
     wind.forEach(w => {
-        let wx = w.x;
-        let wy = w.y;
-        let ww = w.w;
-        let wh = w.h;
+        let wx = Math.floor(w.x);
+        let wy = Math.floor(w.y);
+        let ww = Math.floor(w.w);
+        let wh = Math.floor(w.h);
 
         rectfill2(wx, wy, ww, wh, 0);
         rect(wx + 1, wy + 1, wx + ww - 2, wy + wh - 2, 6);
