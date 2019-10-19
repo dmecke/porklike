@@ -4,7 +4,6 @@ var keys = {};
 
 window.addEventListener('load', () => {
     ctx = document.getElementById('canvas').getContext('2d');
-    // ctx.scale(4, 4);
     _init();
     setInterval(() => {
         _update60();

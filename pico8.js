@@ -47,7 +47,10 @@ function cls(color) {
 function map(color) {
     for (let x = 0; x <= 15; x++) {
         for (let y = 0; y <= 15; y++) {
-            spr(mget(x, y), x, y);
+            let tile = mget(x, y);
+            if (tile !== undefined) {
+                spr(tile, x, y);
+            }
         }
     }
 }
@@ -60,10 +63,18 @@ function fget(x, y) {
     // todo
 }
 
-function spr(tile, x, y, w, h, flip_x) {
-    let img = new Image();
-    img.src = 'tiles/' + tile + '.png';
-    ctx.drawImage(img, x, y, w * 8, h * 8);
+function spr(tile, x, y, w = 1, h = 1, flip_x = false) {
+    if (tile === undefined) {
+        throw new Error();
+    }
+    for (let _w = 0; _w < w; _w++) {
+        for (let _h = 0; _h < h; _h++) {
+            let img = new Image();
+            let tileIndex = tile + _w + _h * 16;
+            img.src = 'tiles/' + tileIndex + '.png';
+            ctx.drawImage(img, x + _w * 8, y + _h * 8, 8, 8);
+        }
+    }
 }
 
 function mget(x, y) {

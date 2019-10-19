@@ -1238,18 +1238,18 @@ function addmob(typ, mx, my) {
         bless: 0,
         charge: 1,
         lastmoved: false,
-        spec: mob_spec[typ],
-        hp: mob_hp[typ],
-        hpmax: mob_hp[typ],
-        atk: mob_atk[typ],
+        spec: mob_spec[typ - 1],
+        hp: mob_hp[typ - 1],
+        hpmax: mob_hp[typ - 1],
+        atk: mob_atk[typ - 1],
         defmin: 0,
         defmax: 0,
-        los: mob_los[typ],
+        los: mob_los[typ - 1],
         task: ai_wait,
-        name: mob_name[typ]
+        name: mob_name[typ - 1]
     };
     for (let i = 0; i <= 3; i++) {
-        add(m.ani, mob_ani[typ] + i);
+        add(m.ani, mob_ani[typ - 1] + i);
     }
     add(mob, m);
     return m;
