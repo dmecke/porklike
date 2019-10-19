@@ -1767,7 +1767,7 @@ function sigarray(sig, arr, marr) {
 
 function placeflags() {
     let curf = 1;
-    let flags = blankmap(0);
+    flags = blankmap(0);
     flaglib = [];
     for (let _x = 0; _x <= 15; _x++) {
         for (let _y = 0; _y <= 15; _y++) {
@@ -1795,6 +1795,9 @@ function growflag(_x, _y, flg) {
             for (let d = 0; d <= 3; d++) {
                 let dx = c.x + dirx[d];
                 let dy = c.y + diry[d];
+                if (!inbounds(dx, dy)) {
+                    continue;
+                }
                 if (!flags[dx]) {
                     flags[dx] = {};
                 }
