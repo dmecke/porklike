@@ -33,10 +33,10 @@ function btnp(button) {
             return keys.ArrowLeft;
 
         case 4:
-            return keys.KeyX;
+            return keys.KeyZ;
 
         case 5:
-            return keys.KeyZ;
+            return keys.KeyX;
     }
 }
 
