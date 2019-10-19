@@ -290,7 +290,7 @@ function flip() {
 }
 
 function mid(first, second, third) {
-    return [first, second, third].sort()[1];
+    return [first, second, third].sort((a, b) => a - b)[1];
 }
 
 function bor(first, second) {
