@@ -397,11 +397,8 @@ function drawlogo() {
         if (logo_t <= 0) {
             logo_y += logo_t / 20;
         }
-        palt(12, true);
-        palt(0, false);
         spr(144, 7, logo_y, 14, 3);
-        palt();
-        oprint8("the quest for kielbasa", 19, logo_y + 20, 7, 0)
+        oprint8("the quest for kielbasa", 19, logo_y + 20, 7, 0);
     }
 }
 
