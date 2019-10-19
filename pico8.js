@@ -48,8 +48,8 @@ function map(color) {
     for (let x = 0; x <= 15; x++) {
         for (let y = 0; y <= 15; y++) {
             let tile = mget(x, y);
-            if (tile !== undefined) {
-                spr(tile, x, y);
+            if (tile !== -1) {
+                spr(tile, x * 8, y * 8);
             }
         }
     }
@@ -78,11 +78,13 @@ function spr(tile, x, y, w = 1, h = 1, flip_x = false) {
 }
 
 function mget(x, y) {
-    return mapContainer[x + '|' + y];
+    let index = x + y * mapScreenWidth * 16;
+    return mapData[index] - 1;
 }
 
 function mset(x, y, tile) {
-    mapContainer[x + '|' + y] = tile;
+    let index = x + y * mapScreenWidth * 16;
+    mapData[index] = tile + 1;
 }
 
 function add(array, element) {

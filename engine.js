@@ -1,5 +1,4 @@
 var ctx;
-var mapContainer = [];
 var keys = {};
 
 window.addEventListener('load', () => {
