@@ -511,7 +511,7 @@ function wait(_wait) {
     } while (_wait >= 0);
 }
 
-function fadeout(spd, _wait) {
+function fadeout(spd = null, _wait = null) {
     if (spd === null) {
         spd = 0.04;
     }
@@ -1565,13 +1565,9 @@ function mapgen() {
         roomap = blankmap(0);
         doors = [];
         genrooms();
-        console.log(2);
         mazeworm();
-        console.log(3);
         placeflags();
-        console.log(4);
         carvedoors();
-        console.log(5);
     } while (flaglib.length > 1);
 
     carvescuts();
@@ -1676,7 +1672,6 @@ function doesroomfit(r, x, y) {
 
 function mazeworm() {
     let cand;
-    console.log('mazeworm start');
     do {
         cand = [];
         for (let _x = 0; _x <= 15; _x++) {
@@ -1691,9 +1686,7 @@ function mazeworm() {
             let c = getrnd(cand);
             digworm(c.x, c.y);
         }
-        console.log(cand.length);
     } while (cand.length > 1);
-    console.log('mazeworm end');
 }
 
 function digworm(x, y) {
