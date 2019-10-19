@@ -343,7 +343,7 @@ function draw_game() {
     animap();
     map();
     dmob.forEach(m => {
-        if (Math.sin(time() * 8) > 0 || m === p_mob) {
+        if (Math.sin(time() / 100 * 8) > 0 || m === p_mob) {
             drawmob(m);
         }
         m.dur -= 1;
@@ -432,7 +432,7 @@ function draw_gover() {
     luaprint("kills: " + st_kills);
     luaprint("meals: " + st_meals);
 
-    luaprint("press ❎", 46, 90, 5 + Math.abs(Math.sin(time() / 3) * 2));
+    luaprint("press ❎", 46, 90, 5 + Math.abs(Math.sin(time() / 100 / 3) * 2));
 }
 
 function animap() {
@@ -1022,7 +1022,7 @@ function drawind() {
             }
             luaprint(txt, wx, wy, c);
             if (i === w.cur) {
-                spr(255, wx - 5 + Math.sin(time()), wy);
+                spr(255, wx - 5 + Math.sin(time() / 100), wy);
             }
             wy += 6;
         }
@@ -1040,7 +1040,7 @@ function drawind() {
             }
         } else {
             if (w.butt) {
-                oprint8("❎", wx + ww - 15, wy - 1 + Math.sin(time()), 6, 0);
+                oprint8("❎", wx + ww - 15, wy - 1 + Math.sin(time() / 100), 6, 0);
             }
         }
     })
@@ -1105,7 +1105,7 @@ function showinv() {
             add(txt, itm_name[itm]);
             add(col, 6);
         } else {
-            add(txt, "+.");
+            add(txt, "...");
             add(col, 5);
         }
     }
