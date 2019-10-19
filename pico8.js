@@ -267,7 +267,8 @@ function luaprint(text, x, y, color) {
 }
 
 function rect(x, y, width, height, color) {
-    // todo
+    ctx.strokeStyle = getColor(color);
+    ctx.strokeRect(x, y, width, height);
 }
 
 function rectfill(x1, y1, x2, y2, color) {
