@@ -89,7 +89,7 @@ function _init() {
     dirx = [-1, 1, 0, 0, 1, 1, -1, -1];
     diry = [0, 0, -1, 1, -1, 1, 1, -1];
 
-    itm_name = ["butter knife", "cheese knife", "paring knife", "utility knife", "chef's knife", "meat cleaver", "paper apron", "cotton apron", "rubber apron", "leather apron", "chef's apron", "butcher's apron", "food 1", "food 2", "food 3", "food 4", "food 5", "food 6", "spork", "salad fork", "fish fork", "dinner fork"];
+    itm_name = ["butter knife", "cheese knife", "paring knife", "utility knife", "chefs knife", "meat cleaver", "paper apron", "cotton apron", "rubber apron", "leather apron", "chef's apron", "butcher's apron", "food 1", "food 2", "food 3", "food 4", "food 5", "food 6", "spork", "salad fork", "fish fork", "dinner fork"];
     itm_type = ["wep", "wep", "wep", "wep", "wep", "wep", "arm", "arm", "arm", "arm", "arm", "arm", "fud", "fud", "fud", "fud", "fud", "fud", "thr", "thr", "thr", "thr"];
     itm_stat1 = [1, 2, 3, 4, 5, 6, 0, 0, 0, 0, 1, 2, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4];
     itm_stat2 = [0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
