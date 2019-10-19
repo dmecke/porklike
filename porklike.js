@@ -672,12 +672,13 @@ function trig_step() {
 }
 
 function getmob(x, y) {
+    let result = false;
     mob.forEach(m => {
         if (m.x === x && m.y === y) {
-            return m;
+            result = m;
         }
     });
-    return false;
+    return result;
 }
 
 function iswalkable(x, y, mode) {
