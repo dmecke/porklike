@@ -65,7 +65,7 @@ var st_steps;
 var st_kills;
 var st_meals;
 var st_killer;
-var flags;
+var flags = {};
 var rooms;
 var roomap;
 var doors;
@@ -1781,6 +1781,9 @@ function growflag(_x, _y, flg) {
         x: _x, y: _y
     }];
     let candnew = null;
+    if (!flags[_x]) {
+        flags[_x] = {};
+    }
     flags[_x][_y] = flg;
     do {
         candnew = [];
@@ -1788,6 +1791,9 @@ function growflag(_x, _y, flg) {
             for (let d = 1; d <= 4; d++) {
                 let dx = c.x + dirx[d];
                 let dy = c.y + diry[d];
+                if (!flags[dx]) {
+                    flags[dx] = {};
+                }
                 if (iswalkable(dx, dy) && flags[dx][dy] !== flg) {
                     flags[dx][dy] = flg;
                     add(candnew, {x: dx, y: dy});
