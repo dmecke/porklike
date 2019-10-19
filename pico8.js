@@ -267,9 +267,9 @@ function luaprint(text, x, y, color) {
     }
 }
 
-function rect(x, y, width, height, color) {
+function rect(x1, y1, x2, y2, color) {
     ctx.strokeStyle = getColor(color);
-    ctx.strokeRect(x, y, width, height);
+    ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
 }
 
 function rectfill(x1, y1, x2, y2, color) {
