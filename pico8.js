@@ -21,16 +21,16 @@ function music(track) {
 function btnp(button) {
     switch (button) {
         case 0:
-            return keys.ArrowRight;
+            return keys.ArrowLeft;
 
         case 1:
-            return keys.ArrowUp;
+            return keys.ArrowRight;
 
         case 2:
-            return keys.ArrowDown;
+            return keys.ArrowUp;
 
         case 3:
-            return keys.ArrowLeft;
+            return keys.ArrowDown;
 
         case 4:
             return keys.KeyZ;
