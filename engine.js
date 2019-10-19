@@ -1,8 +1,14 @@
 var ctx;
 var keys = {};
+var images = {};
 
 window.addEventListener('load', () => {
     ctx = document.getElementById('canvas').getContext('2d');
+    for (let i = 0; i < 256; i++) {
+        images[i] = new Image();
+        images[i].src = 'tiles/' + i + '.png';
+    }
+
     _init();
     setInterval(() => {
         _update60();
