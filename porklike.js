@@ -325,7 +325,7 @@ function dobutt(butt) {
         logo_t = 0;
     }
     if (butt < 4) {
-        moveplayer(dirx[butt + 1], diry[butt + 1])
+        moveplayer(dirx[butt], diry[butt])
     } else if (butt === 5) {
         showinv();
         sfx(54);
