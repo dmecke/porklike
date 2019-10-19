@@ -472,7 +472,7 @@ function rectfill2(_x, _y, _w, _h, _c) {
 }
 
 function oprint8(_t, _x, _y, _c, _c2) {
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 0; i <= 7; i++) {
         luaprint(_t, _x + dirx[i], _y + diry[i], _c2);
     }
     luaprint(_t, _x, _y, _c);
@@ -861,7 +861,7 @@ function unfog() {
 function unfogtile(x, y) {
     fog[x][y] = 0;
     if (iswalkable(x, y, "sight")) {
-        for (let i = 1; i <= 4; i++) {
+        for (let i = 0; i <= 3; i++) {
             let tx = x + dirx[i];
             let ty = y + diry[i];
             if (inbounds(tx, ty) && !iswalkable(tx, ty)) {
@@ -882,7 +882,7 @@ function calcdist(tx, ty) {
         step += 1;
         candnew = [];
         cand.forEach(c => {
-            for (let d = 1; d <= 4; d++) {
+            for (let d = 0; d <= 3; d++) {
                 let dx = c.x + dirx[d];
                 let dy = c.y + diry[d];
                 if (inbounds(dx, dy) && distmap[dx][dy] === -1) {
@@ -1087,7 +1087,7 @@ function showinv() {
     let itm = null;
     let eqt = null;
     _upd = update_inv;
-    for (let i = 1; i <= 2; i++) {
+    for (let i = 0; i <= 1; i++) {
         itm = eqp[i];
         if (itm) {
             eqt = itm_name[itm];
@@ -1100,7 +1100,7 @@ function showinv() {
     }
     add(txt, "……………………");
     add(col, 6);
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 0; i <= 5; i++) {
         itm = inv[i];
         if (itm) {
             add(txt, itm_name[itm]);
@@ -1363,7 +1363,7 @@ function ai_attac(m) {
             let bdst = 999;
             let cand = [];
             calcdist(m.tx, m.ty);
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 0; i <= 3; i++) {
                 let dx = dirx[i];
                 let dy = diry[i];
                 let tx = m.x + dx;
@@ -1465,7 +1465,7 @@ function takeitem(itm) {
 }
 
 function freeinvslot() {
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 0; i <= 5; i++) {
         if (!inv[i]) {
             return i;
         }
@@ -1477,7 +1477,7 @@ function makeipool() {
     ipool_rar = [];
     ipool_com = [];
 
-    for (let i = 1; i <= itm_name.length; i++) {
+    for (let i = 0; i < itm_name.length; i++) {
         let t = itm_type[i];
         if (t === "wep" || t === "arm") {
             add(ipool_rar, i);
@@ -1522,7 +1522,7 @@ function foodnames() {
     let ad = null;
 
     itm_known = [];
-    for (let i = 1; i <= itm_name.length; i++) {
+    for (let i = 0; i < itm_name.length; i++) {
         if (itm_type[i] === "fud") {
             fu = getrnd(fud);
             ad = getrnd(adj);
@@ -1702,7 +1702,7 @@ function digworm(x, y) {
         if (!cancarve(x + dirx[dr], y + diry[dr], false) || (rnd() < 0.5 && stp > 2)) {
             stp = 0;
             let cand = [];
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 0; i <= 3; i++) {
                 if (cancarve(x + dirx[i], y + diry[i], false)) {
                     add(cand, i);
                 }
@@ -1792,7 +1792,7 @@ function growflag(_x, _y, flg) {
     do {
         candnew = [];
         cand.forEach(c => {
-            for (let d = 1; d <= 4; d++) {
+            for (let d = 0; d <= 3; d++) {
                 let dx = c.x + dirx[d];
                 let dy = c.y + diry[d];
                 if (!flags[dx]) {
@@ -2029,7 +2029,7 @@ function starscore(x, y) {
 }
 
 function next2tile(_x, _y, tle) {
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 0; i <= 3; i++) {
         if (inbounds(_x + dirx[i], _y + diry[i]) && mget(_x + dirx[i], _y + diry[i]) === tle) {
             return true;
         }
