@@ -115,7 +115,7 @@ function _init() {
     wall_sig = [251, 233, 253, 84, 146, 80, 16, 144, 112, 208, 241, 248, 210, 177, 225, 120, 179, 0, 124, 104, 161, 64, 240, 128, 224, 176, 242, 244, 116, 232, 178, 212, 247, 214, 254, 192, 48, 96, 32, 160, 245, 250, 243, 249, 246, 252];
     wall_msk = [0, 6, 0, 11, 13, 11, 15, 13, 3, 9, 0, 0, 9, 12, 6, 3, 12, 15, 3, 7, 14, 15, 0, 15, 6, 12, 0, 0, 3, 6, 12, 9, 0, 9, 0, 15, 15, 7, 15, 14, 0, 0, 0, 0, 0, 0];
 
-    startgame()
+    startgame();
 }
 
 function _update60() {
@@ -215,7 +215,7 @@ function update_inv() {
         }
     } else if (btnp(5)) {
         sfx(54);
-        if (curwind === invwind && invwind.cur !== 3) {
+        if (curwind === invwind && invwind.cur !== 2) {
             showuse();
         } else if (curwind === usewind) {
             // use window confirm
@@ -248,7 +248,11 @@ function move_mnu(wnd) {
         wnd.cur += 1;
         moved = true;
     }
-    wnd.cur = (wnd.cur - 1) % wnd.txt.length + 1;
+    if (wnd.cur < 0) {
+        wnd.cur = wnd.txt.length - 1;
+    } else if (wnd.cur >= wnd.txt.length) {
+        wnd.cur = 0;
+    }
     return moved
 }
 
@@ -1008,7 +1012,7 @@ function drawind() {
         wx += 4;
         wy += 4;
         clip(wx, wy, ww - 8, wh - 8);
-        if (w.cur) {
+        if (w.cur !== undefined) {
             wx += 6;
         }
         for (let i = 0; i < w.txt.length; i++) {
@@ -1108,7 +1112,7 @@ function showinv() {
     }
 
     invwind = addwind(5, 17, 84, 62, txt);
-    invwind.cur = 3;
+    invwind.cur = 2;
     invwind.col = col;
 
     txt = "ok    ";
@@ -1124,14 +1128,14 @@ function showinv() {
 }
 
 function showuse() {
-    let itm = invwind.cur < 3 ? eqp[invwind.cur] : inv[invwind.cur - 3];
+    let itm = invwind.cur < 2 ? eqp[invwind.cur] : inv[invwind.cur - 3];
     if (itm === null) {
         return;
     }
     let typ = itm_type[itm];
     let txt = [];
 
-    if ((typ === "wep" || typ === "arm") && invwind.cur > 3) {
+    if ((typ === "wep" || typ === "arm") && invwind.cur > 2) {
         add(txt, "equip");
     }
 
@@ -1145,7 +1149,7 @@ function showuse() {
     add(txt, "trash");
 
     usewind = addwind(84, invwind.cur * 6 + 11, 36, 7 + txt.length * 6, txt);
-    usewind.cur = 1;
+    usewind.cur = 0;
     curwind = usewind;
 }
 
@@ -1456,14 +1460,14 @@ function takeitem(itm) {
     if (i === 0) {
         return false;
     }
-    inv[i] = itm;
+    inv[i - 1] = itm;
     return true;
 }
 
 function freeinvslot() {
     for (let i = 0; i <= 5; i++) {
         if (!inv[i]) {
-            return i;
+            return i + 1;
         }
     }
     return 0;
