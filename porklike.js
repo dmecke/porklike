@@ -127,6 +127,8 @@ function _update60() {
 }
 
 function _draw() {
+    ctx.globalAlpha = 1 - fadeperc;
+    ctx.clearRect(0, 0, 128, 128);
     ctx.save();
     doshake();
     _drw();
@@ -484,46 +486,21 @@ function dist(fx, fy, tx, ty) {
     return Math.sqrt(dx * dx + dy * dy);
 }
 
-function dofade() {
-    let p = Math.floor(mid(0, fadeperc, 1) * 100);
-    let kmax, col;
-    for (let j = 1; j <= 15; j++) {
-        col = j;
-        kmax = Math.floor((p + j * 1.46) / 22);
-        for (let k = 1; k <= kmax; k++) {
-            col = dpal[col];
-        }
-        pal(j, col, 1);
-    }
-}
-
 function checkfade() {
     if (fadeperc > 0) {
-        fadeperc = Math.max(fadeperc - 0.04, 0);
-        dofade();
+        fadeperc = Math.max(fadeperc - 0.01, 0);
     }
 }
 
-function wait(_wait) {
-    do {
-        _wait -= 1;
-        flip();
-    } while (_wait >= 0);
-}
-
-function fadeout(spd = null, _wait = null) {
+function fadeout(spd = null) {
     if (spd === null) {
         spd = 0.04;
     }
-    if (_wait === null) {
-        _wait = 0;
-    }
     do {
         fadeperc = Math.min(fadeperc + spd, 1);
-        dofade();
-        flip();
+        ctx.globalAlpha = 1 - fadeperc;
+        ctx.clearRect(0, 0, 128, 128);
     } while (fadeperc !== 1);
-    wait(_wait);
 }
 
 function blankmap(_dflt) {

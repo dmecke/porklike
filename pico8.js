@@ -269,20 +269,12 @@ function line(x1, y1, x2, y2, color, pattern) {
     ctx.setLineDash([]);
 }
 
-function pal() {
-    // todo
-}
-
 function clip(x, y, width, height, color) {
     // todo
 }
 
 function time() {
     return Date.now();
-}
-
-function flip() {
-    // todo
 }
 
 function mid(first, second, third) {
