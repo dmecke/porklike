@@ -423,11 +423,11 @@ function draw_gover() {
     let y = 56;
     if (!win) {
         luaprint("floor: " + floor, 40, 56, 5);
-        y++;
+        y += 6;
     }
     luaprint("steps: " + st_steps, 40, y, 5);
-    luaprint("kills: " + st_kills, 40, y + 1, 5);
-    luaprint("meals: " + st_meals, 40, y + 2, 5);
+    luaprint("kills: " + st_kills, 40, y + 6, 5);
+    luaprint("meals: " + st_meals, 40, y + 12, 5);
 
     luaprint("press ❎", 46, 90, 5 + Math.floor(Math.abs(Math.sin(time() / 100 / 3) * 2)));
 }
