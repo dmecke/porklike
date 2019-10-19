@@ -992,7 +992,6 @@ function drawind() {
         rect(wx + 1, wy + 1, wx + ww - 2, wy + wh - 2, 6);
         wx += 4;
         wy += 4;
-        clip(wx, wy, ww - 8, wh - 8);
         if (w.cur !== undefined) {
             wx += 6;
         }
@@ -1008,7 +1007,6 @@ function drawind() {
             }
             wy += 6;
         }
-        clip();
 
         if (w.dur !== undefined) {
             w.dur -= 1;
