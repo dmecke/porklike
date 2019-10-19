@@ -294,7 +294,7 @@ function clip(x, y, width, height, color) {
 }
 
 function time() {
-    // todo
+    return Date.now();
 }
 
 function flip() {
