@@ -1690,7 +1690,7 @@ function mazeworm() {
             let c = getrnd(cand);
             digworm(c.x, c.y);
         }
-    } while (cand.length > 1);
+    } while (cand.length > 0);
 }
 
 function digworm(x, y) {
@@ -1739,7 +1739,7 @@ function bcomp(sig, match, mask) {
 function getsig(x, y) {
     let sig = 0;
     let digit;
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 0; i <= 7; i++) {
         let dx = x + dirx[i];
         let dy = y + diry[i];
         if (iswalkable(dx, dy)) {
@@ -1747,15 +1747,15 @@ function getsig(x, y) {
         } else {
             digit = 1;
         }
-        sig = bor(sig, shl(digit, 8 - i));
+        sig = bor(sig, shl(digit, 7 - i));
     }
     return sig;
 }
 
 function sigarray(sig, arr, marr) {
-    for (let i = 1; i <= arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         if (bcomp(sig, arr[i], marr[i])) {
-            return i;
+            return i + 1;
         }
     }
     return 0;
@@ -1930,7 +1930,7 @@ function isdoor(x, y) {
 
 function nexttoroom(x, y, dirs) {
     dirs = dirs ? dirs : 4;
-    for (let i = 1; i <= dirs; i++) {
+    for (let i = 0; i <= dirs - 1; i++) {
         if (inbounds(x + dirx[i], y + diry[i]) && roomap[x + dirx[i]][y + diry[i]] !== 0) {
             return true;
         }
