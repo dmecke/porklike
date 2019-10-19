@@ -179,6 +179,7 @@ function startgame() {
     st_killer = "";
 
     genfloor(0);
+    takeitem(20);
 }
 
 //>8
@@ -378,7 +379,6 @@ function draw_game() {
             pattern = [0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0];
         }
         line(lx1, ly1, lx2, ly2, 7, pattern);
-        fillp();
         oprint8("+", lx2 - 1, ly2 - 2, 7, 0);
 
         if (mb && thrani) {

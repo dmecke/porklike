@@ -269,10 +269,6 @@ function line(x1, y1, x2, y2, color, pattern) {
     ctx.setLineDash([]);
 }
 
-function fillp(value) {
-    // todo
-}
-
 function palt(color, flag) {
     // todo
 }
