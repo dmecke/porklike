@@ -461,10 +461,7 @@ function getframe(ani) {
 }
 
 function drawspr(_spr, _x, _y, _c, _flip) {
-    palt(0, false);
-    pal(6, _c);
     spr(_spr, _x, _y, 1, 1, _flip);
-    pal();
 }
 
 function rectfill2(_x, _y, _w, _h, _c) {
