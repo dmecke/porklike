@@ -139,7 +139,7 @@ function _draw() {
 }
 
 function startgame() {
-    music(0);
+    music(0, true);
     tani = 0;
     fadeperc = 1;
     buttbuff = -1;
@@ -755,14 +755,14 @@ function blessmob(mb, val) {
 
 function checkend() {
     if (win) {
-        music(24);
+        music(24, false);
         gover_spr = 112;
         gover_x = 15;
         gover_w = 13;
         showgover();
         return false
     } else if (p_mob.hp <= 0) {
-        music(22);
+        music(22, false);
         gover_spr = 80;
         gover_x = 28;
         gover_w = 9;
@@ -1523,7 +1523,7 @@ function genfloor(f) {
     fog = blankmap(0);
     if (floor === 1) {
         st_steps = 0;
-        music(1);
+        music(1, true);
     }
     if (floor === 0) {
         copymap(16, 0);

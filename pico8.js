@@ -2,7 +2,7 @@ function sfx(track) {
     new Audio('sfx/' + track + '.wav').play();
 }
 
-function music(track) {
+function music(track, loop) {
     for (let source in audioSource) {
         audioSource[source].stop();
     }
@@ -15,7 +15,7 @@ function music(track) {
             audioSource[track].connect(audioContext.destination);
             audioSource[track].buffer = response;
             audioSource[track].start(0);
-            audioSource[track].loop = true;
+            audioSource[track].loop = loop;
         });
     };
     request.send();
