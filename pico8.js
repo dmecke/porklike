@@ -1,5 +1,5 @@
 function sfx(track) {
-    // todo
+    new Audio('sfx/' + track + '.wav').play();
 }
 
 function poke(position) {
