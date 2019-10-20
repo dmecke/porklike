@@ -1546,10 +1546,6 @@ function mapgen() {
         mazeworm();
         placeflags();
         carvedoors();
-        if (flaglib.length > 1) {
-            console.error('could not generate map - not all rooms could be connected');
-            return;
-        }
     } while (flaglib.length > 1);
 
     carvescuts();
