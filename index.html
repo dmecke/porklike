@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Porklike</title>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
     <style>
+        body {
+            margin: 0;
+            background: #5F574F;
+            color: #fff;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+        h1, h2 {
+            text-align: center;
+        }
         canvas {
-            border: 1px solid black;
+            display: block;
+            margin: 50px auto;
             width: 512px;
             height: 512px;
             image-rendering: -moz-crisp-edges;
@@ -14,10 +25,27 @@
             image-rendering: pixelated;
             image-rendering: crisp-edges;
         }
+        p {
+            text-align: center;
+            width: 800px;
+            margin: 20px auto 50px;
+        }
+        a {
+            color: #29ADFF;
+        }
     </style>
 </head>
 <body>
+    <h1>Porklike</h1>
     <canvas id="canvas" width="128" height="128"></canvas>
+
+    <h2>Controls</h2>
+    <p>Move with the arrow keys. Use [x] to select / confirm and [z] to cancel.</p>
+
+    <h2>Credits</h2>
+    <p>This is a javascript port of the <a href="https://www.lexaloffle.com/pico-8.php" target="_blank">PICO-8</a> game created in <a href="https://www.youtube.com/playlist?list=PLea8cjCua_P3LL7J1Q9b6PJua0A-96uUS" target="_blank">Lazy Devs YouTube Tutorial</a>. I tried to stay as close to the original code as possible, though some parts had to be adjusted due to the platform differences. You can find the source code at <a href="https://github.com/dmecke/porklike" target="_blank">GitHub</a> and me at <a href="https://www.twitter.com/pixel_pincher" target="_blank">Twitter</a>.</p>
+    <p>Thanks Krystian for the awesome tutorial!</p>
+
     <script src="engine.js"></script>
     <script src="pico8.js"></script>
     <script src="porklike.js"></script>
