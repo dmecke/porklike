@@ -139,7 +139,6 @@ function _draw() {
 }
 
 function startgame() {
-    poke(0x3101, 194);
     music(0);
     tani = 0;
     fadeperc = 1;
@@ -1524,7 +1523,7 @@ function genfloor(f) {
     fog = blankmap(0);
     if (floor === 1) {
         st_steps = 0;
-        poke(0x3101, 66);
+        music(1);
     }
     if (floor === 0) {
         copymap(16, 0);

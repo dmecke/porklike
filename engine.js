@@ -2,6 +2,8 @@ var ctx;
 var keys = {};
 var images = {};
 var bitmapFont = {};
+var audioContext;
+var audioSource = {};
 
 window.addEventListener('load', () => {
     ctx = document.getElementById('canvas').getContext('2d');
@@ -27,6 +29,8 @@ window.addEventListener('load', () => {
 
     bitmapFont[10] = new Image();
     bitmapFont[10].src = 'pico8_font_10.png';
+
+    audioContext = new AudioContext();
 
     _init();
     setInterval(() => {

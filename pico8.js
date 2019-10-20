@@ -2,12 +2,23 @@ function sfx(track) {
     new Audio('sfx/' + track + '.wav').play();
 }
 
-function poke(position) {
-    // todo
-}
-
 function music(track) {
-    // todo
+    for (let source in audioSource) {
+        audioSource[source].stop();
+    }
+    let request = new XMLHttpRequest();
+    request.open('GET', 'music/' + track + '.wav', true);
+    request.responseType = 'arraybuffer';
+    request.onload = () => {
+        audioContext.decodeAudioData(request.response, response => {
+            audioSource[track] = audioContext.createBufferSource();
+            audioSource[track].connect(audioContext.destination);
+            audioSource[track].buffer = response;
+            audioSource[track].start(0);
+            audioSource[track].loop = true;
+        });
+    };
+    request.send();
 }
 
 function btnp(button) {
