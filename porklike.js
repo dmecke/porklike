@@ -383,20 +383,20 @@ function draw_game() {
         oprint8("+", lx2 - 1, ly2 - 2, 7, 0);
 
         if (mb && thrani) {
-            mb.flash = 1
+            mb.flash = 1;
         }
     }
 
     for (let x = 0; x <= 15; x++) {
         for (let y = 0; y <= 15; y++) {
             if (fog[x][y] === 1) {
-                rectfill2(x * 8, y * 8, 8, 8, 0)
+                rectfill2(x * 8, y * 8, 8, 8, 0);
             }
         }
     }
 
     float.forEach(f => {
-        oprint8(f.txt, f.x, f.y, f.c, 0)
+        oprint8(f.txt, f.x, f.y, f.c, 0);
     })
 }
 
@@ -469,7 +469,7 @@ function drawspr(_spr, _x, _y, _c, _flip) {
 }
 
 function rectfill2(_x, _y, _w, _h, _c) {
-    rectfill(_x, _y, _x + Math.max(_w - 1, 0), _y + Math.max(_h - 1, 0), _c);
+    rectfill(_x, _y, _x + Math.max(_w, 0), _y + Math.max(_h, 0), _c);
 }
 
 function oprint8(_t, _x, _y, _c, _c2) {
