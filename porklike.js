@@ -175,7 +175,6 @@ function startgame() {
     st_killer = "";
 
     genfloor(0);
-    takeitem(20);
 }
 
 //>8
