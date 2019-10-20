@@ -1530,7 +1530,7 @@ function genfloor(f) {
     } else if (floor === winfloor) {
         copymap(32, 0);
     } else {
-        // fog = blankmap(1);
+        fog = blankmap(1);
         mapgen();
         unfog();
     }
