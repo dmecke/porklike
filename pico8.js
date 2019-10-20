@@ -85,7 +85,11 @@ function spr(tile, x, y, w = 1, h = 1, flip_x = false) {
     for (let _w = 0; _w < w; _w++) {
         for (let _h = 0; _h < h; _h++) {
             let tileIndex = tile + _w + _h * 16;
-            ctx.drawImage(images[tileIndex], x + _w * 8, y + _h * 8, 8, 8);
+            ctx.save();
+            ctx.translate(x + _w * 8, y + _h * 8);
+            ctx.scale(flip_x ? -1 : 1, 1);
+            ctx.drawImage(images[tileIndex], flip_x ? -8 : 0, 0, 8, 8);
+            ctx.restore();
         }
     }
 }
