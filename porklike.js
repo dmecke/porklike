@@ -46,7 +46,6 @@ var fipool_rar;
 var fipool_com;
 var itm_known;
 var tani;
-var fadeperc;
 var logo_t;
 var logo_y;
 var win;
@@ -127,21 +126,17 @@ function _update60() {
 }
 
 function _draw() {
-    ctx.globalAlpha = 1 - fadeperc;
-    ctx.clearRect(0, 0, 128, 128);
     ctx.save();
     doshake();
     _drw();
     drawind();
     drawlogo();
-    checkfade();
     ctx.restore();
 }
 
 function startgame() {
     music(0, true);
     tani = 0;
-    fadeperc = 1;
     buttbuff = -1;
 
     logo_t = 240;
@@ -303,7 +298,6 @@ function update_aiturn() {
 function update_gover() {
     if (btnp(5)) {
         sfx(54);
-        fadeout();
         startgame();
     }
 }
@@ -342,9 +336,6 @@ function dobutt(butt) {
 //draws
 function draw_game() {
     cls(0);
-    if (fadeperc === 1) {
-        return
-    }
     animap();
     map();
     dmob.forEach(m => {
@@ -485,23 +476,6 @@ function dist(fx, fy, tx, ty) {
     return Math.sqrt(dx * dx + dy * dy);
 }
 
-function checkfade() {
-    if (fadeperc > 0) {
-        fadeperc = Math.max(fadeperc - 0.01, 0);
-    }
-}
-
-function fadeout(spd = null) {
-    if (spd === null) {
-        spd = 0.04;
-    }
-    do {
-        fadeperc = Math.min(fadeperc + spd, 1);
-        ctx.globalAlpha = 1 - fadeperc;
-        ctx.clearRect(0, 0, 128, 128);
-    } while (fadeperc !== 1);
-}
-
 function blankmap(_dflt) {
     let ret = {};
     if (_dflt === null) {
@@ -639,7 +613,6 @@ function trig_step() {
     if (tle === 14) {
         sfx(55);
         p_mob.bless = 0;
-        fadeout();
         genfloor(floor + 1);
         floormsg();
         return true
@@ -776,7 +749,6 @@ function showgover() {
     wind = [];
     _upd = update_gover;
     _drw = draw_gover;
-    fadeout(0.02);
 }
 
 function los(x1, y1, x2, y2) {
