@@ -1983,7 +1983,7 @@ function startend() {
     }
 
     if (roomap[px][py] > 0) {
-        rooms[roomap[px][py]].nospawn = true;
+        rooms[roomap[px][py] - 1].nospawn = true;
     }
     mset(px, py, 15);
     p_mob.x = px;
