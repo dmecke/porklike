@@ -853,13 +853,13 @@ function updatestats() {
     let dmin = 0;
     let dmax = 0;
 
-    if (eqp[1]) {
-        atk += itm_stat1[eqp[1]];
+    if (eqp[0] !== undefined && eqp[0] !== null) {
+        atk += itm_stat1[eqp[0]];
     }
 
-    if (eqp[2]) {
-        dmin += itm_stat1[eqp[2]];
-        dmax += itm_stat2[eqp[2]];
+    if (eqp[1] !== undefined && eqp[1] !== null) {
+        dmin += itm_stat1[eqp[1]];
+        dmax += itm_stat2[eqp[1]];
     }
 
     p_mob.atk = atk;
@@ -1038,11 +1038,11 @@ function showinv() {
     _upd = update_inv;
     for (let i = 0; i <= 1; i++) {
         itm = eqp[i];
-        if (itm) {
+        if (itm !== undefined && itm !== null) {
             eqt = itm_name[itm];
             add(col, 6);
         } else {
-            eqt = i === 1 ? "[weapon]" : "[armor]";
+            eqt = i === 0 ? "[weapon]" : "[armor]";
             add(col, 5);
         }
         add(txt, eqt);
@@ -1051,7 +1051,7 @@ function showinv() {
     add(col, 6);
     for (let i = 0; i <= 5; i++) {
         itm = inv[i];
-        if (itm) {
+        if (itm !== undefined && itm !== null) {
             add(txt, itm_name[itm]);
             add(col, 6);
         } else {
@@ -1115,9 +1115,9 @@ function triguse() {
             inv[i - 3] = null;
         }
     } else if (verb === "equip") {
-        let slot = 2;
+        let slot = 1;
         if (itm_type[itm] === "wep") {
-            slot = 1;
+            slot = 0;
         }
         inv[i - 3] = eqp[slot];
         eqp[slot] = itm;
@@ -1162,16 +1162,14 @@ function showhint() {
         hintwind = null;
     }
 
-    if (invwind.cur > 3) {
+    if (invwind.cur > 2) {
         let itm = inv[invwind.cur - 3];
 
-        if (itm && itm_type[itm] === "fud") {
+        if ((itm !== undefined && itm !== null) && itm_type[itm] === "fud") {
             let txt = itm_known[itm] ? itm_name[itm] + itm_desc[itm] : "???";
             hintwind = addwind(5, 78, txt.length * 4 + 7, 13, [txt]);
         }
-
     }
-
 }
 
 //>8
@@ -1467,7 +1465,7 @@ function getitm_rar() {
 function foodnames() {
     let fud = ["jerky", "schnitzel", "steak", "gyros", "fricassee", "haggis", "mett", "kebab", "burger", "meatball", "pizza", "calzone", "pasticio", "chops", "hams", "ribs", "roast", "meatloaf", "chili", "stew", "pie", "wrap", "taco", "burrito", "rolls", "filet", "salami", "sandwich", "casserole", "spam", "souvlaki"];
     let fu = null;
-    let adj = ["yellow", "green", "blue", "purple", "black", "sweet", "salty", "spicy", "strange", "old", "dry", "wet", "smooth", "soft", "crusty", "pickled", "sour", "leftover", "mom's", "steamed", "hairy", "smoked", "mini", "stuffed", "classic", "marinated", "bbq", "savory", "baked", "juicy", "sloppy", "cheesy", "hot", "cold", "zesty"];
+    let adj = ["yellow", "green", "blue", "purple", "black", "sweet", "salty", "spicy", "strange", "old", "dry", "wet", "smooth", "soft", "crusty", "pickled", "sour", "leftover", "moms", "steamed", "hairy", "smoked", "mini", "stuffed", "classic", "marinated", "bbq", "savory", "baked", "juicy", "sloppy", "cheesy", "hot", "cold", "zesty"];
     let ad = null;
 
     itm_known = [];
